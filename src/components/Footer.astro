@@ -16,23 +16,24 @@ const socials = [
   },
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/company/fhmcaz/',
+    href: site.social.linkedin,
     path: 'M4.98 3.5C4.98 4.88 3.87 6 2.5 6S.02 4.88.02 3.5C.02 2.12 1.13 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zM8.5 8.5h3.8v2h.1c.5-1 1.8-2.1 3.7-2.1 4 0 4.7 2.6 4.7 6V23h-4v-6.6c0-1.6 0-3.6-2.2-3.6s-2.5 1.7-2.5 3.5V23h-4V8.5z',
   },
   {
     label: 'YouTube',
-    href: 'https://www.youtube.com/@FHMCAZ',
+    href: site.social.youtube,
     path: 'M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.8 15.5v-7l6.3 3.5-6.3 3.5z',
   },
   {
     label: 'Pinterest',
-    href: 'https://www.pinterest.com/fountainhillsemergencyroom/',
+    href: site.social.pinterest,
     path: 'M12 0C5.4 0 0 5.4 0 12c0 5.1 3.2 9.4 7.6 11.1-.1-.9-.2-2.4 0-3.4.2-.9 1.4-5.8 1.4-5.8s-.4-.7-.4-1.8c0-1.7 1-2.9 2.2-2.9 1 0 1.5.8 1.5 1.7 0 1-.7 2.6-1 4-.3 1.2.6 2.2 1.8 2.2 2.1 0 3.8-2.3 3.8-5.5 0-2.9-2.1-4.9-5-4.9-3.4 0-5.4 2.5-5.4 5.2 0 1 .4 2.1.9 2.7.1.1.1.2.1.3l-.3 1.4c0 .2-.2.2-.4.1-1.5-.7-2.4-2.9-2.4-4.7 0-3.8 2.8-7.3 8-7.3 4.2 0 7.5 3 7.5 7 0 4.2-2.6 7.5-6.3 7.5-1.2 0-2.4-.6-2.8-1.4l-.8 2.9c-.3 1.1-1 2.4-1.5 3.2C9.6 23.8 10.8 24 12 24c6.6 0 12-5.4 12-12S18.6 0 12 0z',
   },
 ];
 ---
 
 <footer>
+  <!-- WP footer: #110204 body + brand copyright bar -->
   <div class="bg-footer text-white">
     <div class="mx-auto grid max-w-[1280px] gap-10 px-4 py-[5em] sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
       <div>
@@ -44,14 +45,15 @@ const socials = [
           height="100"
         />
         <p class="text-base leading-relaxed text-footer-muted">
-          At Fountain Hills Emergency Room and Medical Center, we combine advanced medical technology with compassionate care to serve our community 24/7.
+          At Fountain Hills Emergency Room and Medical Center, we combine advanced medical technology with
+          compassionate care to serve our community 24/7.
         </p>
         <div class="mt-5 flex flex-wrap gap-1.5">
           {
             socials.map((s) => (
               <a
                 href={s.href}
-                class="inline-flex h-8 w-8 items-center justify-center rounded-[7px] bg-brand hover:bg-[#241618]"
+                class="inline-flex h-10 w-10 items-center justify-center rounded-[7px] bg-brand transition hover:bg-[#241618]"
                 aria-label={s.label}
                 rel="noopener"
                 target="_blank"
@@ -66,42 +68,65 @@ const socials = [
       </div>
 
       <div class="lg:pl-12">
-        <h3 class="mb-5 text-2xl font-semibold text-white" style="font-family: var(--font-display);">Quick Link</h3>
+        <h3 class="mb-5 text-2xl font-semibold text-white" style="font-family: var(--font-display);">
+          Quick Link
+        </h3>
         <ul class="space-y-3 text-base text-footer-muted">
-          <li><a class="hover:text-white" href={`${base}frequently-asked-questions/`}>FAQ</a></li>
-          <li><a class="hover:text-white" href={site.payBill} rel="noopener" target="_blank">Billing</a></li>
-          <li><a class="hover:text-white" href={`${base}privacy-policy/`}>Privacy Policy</a></li>
-          <li><a class="hover:text-white" href={`${base}contact-us/`}>Contact</a></li>
+          <li>
+            <a class="hover:text-white" href={`${base}frequently-asked-questions/`}>FAQ</a>
+          </li>
+          <li>
+            <a class="hover:text-white" href={site.payBill} rel="noopener" target="_blank">Billing</a>
+          </li>
+          <li>
+            <a class="hover:text-white" href={`${base}privacy-policy/`}>Privacy Policy</a>
+          </li>
+          <li>
+            <a class="hover:text-white" href={`${base}contact-us/`}>Contact</a>
+          </li>
         </ul>
       </div>
 
       <div>
-        <h3 class="mb-5 text-2xl font-semibold text-white" style="font-family: var(--font-display);">Contact Information</h3>
+        <h3 class="mb-5 text-2xl font-semibold text-white" style="font-family: var(--font-display);">
+          Contact Information
+        </h3>
         <ul class="space-y-3 text-base text-footer-muted">
           <li class="flex items-start gap-3">
             <img src={`${base}images/Group-1557.svg`} alt="" class="mt-1 h-6 w-6" width="24" height="24" />
-            <a href={`tel:${site.phones.clinicTel}`}>Medical Clinic: {site.phones.clinic}</a>
+            <a class="hover:text-white" href={`tel:${site.phones.clinicTel}`}>
+              Medical Clinic: {site.phones.clinic}
+            </a>
           </li>
           <li class="flex items-start gap-3">
             <img src={`${base}images/Group-1556.svg`} alt="" class="mt-1 h-6 w-6" width="24" height="24" />
-            <a href={`tel:${site.phones.erTel}`}>24/7 Emergency: {site.phones.er}</a>
+            <a class="hover:text-white" href={`tel:${site.phones.erTel}`}>
+              24/7 Emergency: {site.phones.er}
+            </a>
           </li>
           <li class="flex items-start gap-3">
             <img src={`${base}images/Group-1558.svg`} alt="" class="mt-1 h-6 w-6" width="24" height="24" />
-            <a href={`tel:${site.phones.billingTel}`}>Billing: {site.phones.billing}</a>
+            <a class="hover:text-white" href={`tel:${site.phones.billingTel}`}>
+              Billing: {site.phones.billing}
+            </a>
+          </li>
+          <li>
+            <a class="hover:text-white" href={`mailto:${site.email}`}>{site.email}</a>
           </li>
         </ul>
       </div>
 
       <div class="lg:pl-12">
-        <h3 class="mb-5 text-2xl font-semibold text-white" style="font-family: var(--font-display);">Location</h3>
+        <h3 class="mb-5 text-2xl font-semibold text-white" style="font-family: var(--font-display);">
+          Location
+        </h3>
         <p class="text-base text-footer-muted">
-          Visit our modern facility in Fountain Hills, AZ — open 24/7 for emergency and family medical services.
+          Visit our modern facility in Fountain Hills, AZ — open 24/7 for emergency and family medical
+          services.
         </p>
-        <p class="mt-3 text-base text-footer-muted">9700 N. Saguaro Blvd, Fountain Hills, AZ 85268</p>
+        <p class="mt-3 text-base text-footer-muted">{site.address.full}</p>
         <a
-          class="mt-4 inline-block text-base font-semibold underline underline-offset-4"
-          style="color:#B90505;"
+          class="mt-4 inline-block border-b border-[#B90505] pb-2.5 text-base font-semibold text-[#B90505] transition hover:text-white hover:border-white"
           href={site.maps}
           rel="noopener"
           target="_blank"
@@ -114,6 +139,8 @@ const socials = [
 
   <div class="bg-brand py-5 text-center text-base text-white">
     © {year} Fountain Hills Medical Center. All Rights Reserved. Design by{' '}
-    <a href="https://bmybrand.com/" class="underline hover:no-underline" rel="noopener" target="_blank">Bmybrand</a>
+    <a href="https://bmybrand.com/" class="font-semibold underline hover:no-underline" rel="noopener" target="_blank"
+      >Bmybrand</a
+    >
   </div>
 </footer>

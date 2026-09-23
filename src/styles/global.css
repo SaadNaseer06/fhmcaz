@@ -170,8 +170,9 @@
 
   .btn-header-cta {
     display: inline-flex;
+    flex-direction: row-reverse;
     align-items: center;
-    gap: 4px;
+    gap: 0;
     background: #c0212f;
     color: #fff;
     border: 2px solid #c0212f;
@@ -181,6 +182,18 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 45px;
+  }
+  .btn-header-cta__label {
+    padding-right: 8px;
+  }
+  .btn-header-cta__icon {
+    display: inline-flex;
+    line-height: 0;
+  }
+  .btn-header-cta__icon svg {
+    width: 45px;
+    height: 45px;
+    display: block;
   }
   .btn-header-cta:hover {
     background: #b32733;

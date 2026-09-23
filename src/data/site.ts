@@ -20,10 +20,14 @@ export const site = {
   social: {
     facebook: 'https://www.facebook.com/FHMCAZ',
     instagram: 'https://www.instagram.com/fountainhillsemergencyroom',
+    linkedin: 'https://www.linkedin.com/company/fhmcaz/',
+    youtube: 'https://www.youtube.com/@FHMCAZ',
+    pinterest: 'https://www.pinterest.com/fountainhillsemergencyroom/',
   },
   payBill: 'https://www.paystatementonline.com/login',
   maps: 'https://www.google.com/maps/search/?api=1&query=9700+N+Saguaro+Blvd+Fountain+Hills+AZ',
-  healthpass: '/contact-us/',
+  /** Matches WP header CTA */
+  healthpass: 'https://instinctivehealthpass.com/',
   wpApi:
     import.meta.env.WP_API_URL ||
     'http://localhost/fhmcaz/blog/wp-json/wp/v2',
@@ -64,19 +68,9 @@ export const nav: NavItem[] = [
     ],
   },
   {
+    /* WP desktop menu: flat link (no dropdown) */
     label: 'Primary Care & Urgent Care',
     href: '/fountain-hills-primary-care-clinic/',
-    children: [
-      {
-        label: 'Primary Care & Urgent Care',
-        href: '/primary-care-urgent-care/',
-      },
-      { label: 'Book Appointment', href: '/book-appointments/' },
-      {
-        label: 'Medical Clinic FAQs',
-        href: '/frequently-asked-questions/',
-      },
-    ],
   },
   {
     label: 'Pay Bill',

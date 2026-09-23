@@ -1,0 +1,71 @@
+---
+import { site } from '../data/site';
+const base = import.meta.env.BASE_URL;
+---
+
+<!-- WP Elementor popup 1138 — insurance / HealthPass notice -->
+<dialog
+  id="site-notice-modal"
+  class="fixed inset-0 z-[110] m-0 h-full max-h-none w-full max-w-none bg-black/60 p-4 open:flex open:items-center open:justify-center"
+  aria-labelledby="site-notice-title"
+>
+  <form method="dialog" class="absolute inset-0" aria-label="Close notice"></form>
+  <div class="relative z-10 mx-auto max-h-[90vh] w-full max-w-[560px] overflow-y-auto rounded-2xl bg-white px-6 py-8 text-center shadow-2xl sm:px-10 sm:py-10">
+    <button
+      type="button"
+      class="absolute right-4 top-4 text-2xl leading-none text-ink hover:text-brand"
+      aria-label="Close"
+      data-close-notice
+    >
+      ×
+    </button>
+    <img
+      src={`${base}images/FH-EmergencyRoom-Logo-ERClinic-1-1.png`}
+      alt=""
+      class="mx-auto mb-6 h-auto w-full max-w-[220px]"
+      width="220"
+      height="64"
+    />
+    <h2 id="site-notice-title" class="mb-3 text-xl font-bold text-ink sm:text-2xl" style="font-family: var(--font-display);">
+      Fountain Hills Emergency Room and Medical Center
+    </h2>
+    <p class="mx-auto max-w-[440px] text-[15px] leading-relaxed text-[#595A5C]">
+      At Fountain Hills Emergency Room and Medical Center, we honor all in-network insurance benefits for
+      emergency services.
+      <br /><br />
+      Please note: an Explanation of Benefits (EOB) or email from your insurance provider is not a bill.
+    </p>
+    <p class="mx-auto mt-4 max-w-[440px] text-[15px] font-semibold text-brand">
+      We do not balance bill patients for any emergency care received.
+    </p>
+    <hr class="my-6 border-[#e5e5e5]" />
+    <h3 class="mb-3 text-lg font-bold text-ink sm:text-xl" style="font-family: var(--font-display);">
+      Tired of Medical Bills? Instinctive HealthPass Can Help!
+    </h3>
+    <p class="mx-auto max-w-[440px] text-[15px] leading-relaxed text-[#595A5C]">
+      If you’re commercially insured and frustrated by steep deductibles, unexpected bills, and limited
+      options, you’re not alone. One fee, endless care.
+    </p>
+    <a
+      href={site.healthpass}
+      class="btn-cta mt-6 inline-flex"
+      target="_blank"
+      rel="noopener"
+    >
+      Learn about HealthPass
+    </a>
+  </div>
+</dialog>
+
+<script>
+  const modal = document.getElementById('site-notice-modal') as HTMLDialogElement | null;
+  document.querySelectorAll('[data-open-notice]').forEach((btn) => {
+    btn.addEventListener('click', () => modal?.showModal());
+  });
+  document.querySelectorAll('[data-close-notice]').forEach((btn) => {
+    btn.addEventListener('click', () => modal?.close());
+  });
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) modal.close();
+  });
+</script>
