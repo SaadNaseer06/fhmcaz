@@ -1,0 +1,124 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import HelpTrio from '../components/HelpTrio.astro';
+import BlogStrip from '../components/BlogStrip.astro';
+import Reviews from '../components/Reviews.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="About Us" description="Excellence in emergency care with compassion in every step at Fountain Hills Emergency Room and Medical Center.">
+  <PageHero
+    title="About Us"
+    subtitle="Excellence in Emergency Care, Compassion in Every Step"
+    crumbs={[{ label: 'About Us' }]}
+  />
+
+  <section class="bg-white py-[78px]">
+    <div class="container-home grid items-center gap-10 lg:grid-cols-2">
+      <img src={`${base}images/Group-1482.png`} alt="About Fountain Hills Medical Center" class="w-full rounded-xl" loading="lazy" data-animate="left" />
+      <div data-animate="right" style="--delay:100ms">
+        <span class="pill-label">About Us</span>
+        <h2 class="section-title mt-4">Excellence in Emergency Care, Compassion in Every Step</h2>
+        <p class="prose-site mt-4 border-b border-[#E8E8E8] pb-6">
+          At Fountain Hills Emergency Room and Medical Center, our board-certified physicians deliver 24/7 emergency services using a best practice, patient-first approach. Fast, compassionate treatment, keeping surrounding communities healthy, day and night.
+        </p>
+        <div class="mt-6 grid gap-5 sm:grid-cols-2">
+          <div class="flex gap-3">
+            <img src={`${base}images/Background-11.png`} alt="" class="h-14 w-14 object-contain" />
+            <div>
+              <h3 class="text-xl font-semibold" style="font-family: var(--font-display);">More Experience</h3>
+              <p class="mt-1 text-sm text-muted">Emergency care for all age groups.</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <img src={`${base}images/Background-12.png`} alt="" class="h-14 w-14 object-contain" />
+            <div>
+              <h3 class="text-xl font-semibold" style="font-family: var(--font-display);">Innovation & Impact</h3>
+              <p class="mt-1 text-sm text-muted">Best practice, patient-first approach for faster, safer results.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray py-[70px]">
+    <div class="container-home">
+      <span class="pill-label">Why Choose Us</span>
+      <h2 class="section-title mt-4 max-w-3xl">Where Compassion Meets Excellence in Emergency Care</h2>
+      <h3 class="mt-8 text-2xl font-bold" style="font-family: var(--font-display);">Our Core Strengths</h3>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {
+          [
+            { img: 'Background-5.png', t: 'Personalized Emergency Care', d: 'Every patient receives individualized attention from board-certified physicians, nurses, and medical staff.' },
+            { img: 'Background-6.png', t: 'Personalized Patient Care', d: 'Our expert team brings decades of emergency medicine experience to deliver accurate, compassionate care 24/7.' },
+            { img: 'Background-7.png', t: 'Advanced Facilities & Technology', d: 'With on-site imaging, labs, and diagnostics, we provide fast, precise results for every emergency.' },
+          ].map((c) => (
+            <article class="rounded-[20px] bg-white p-6">
+              <img src={`${base}images/${c.img}`} alt="" class="mb-4 h-16 w-16 object-contain" />
+              <h4 class="text-xl font-bold" style="font-family: var(--font-display);">{c.t}</h4>
+              <p class="prose-site mt-3">{c.d}</p>
+            </article>
+          ))
+        }
+      </div>
+      <a class="btn-cta mt-10" href={`${base}fountain-hills-primary-care-clinic/`}>Explore Our Services →</a>
+    </div>
+  </section>
+
+  <section class="bg-cover bg-center py-16 text-white" style={`background-image:url('${base}images/Group-1-16.png');`}>
+    <div class="container-home grid gap-8 md:grid-cols-2 md:items-center" data-animate="up">
+      <div>
+        <span class="pill-label">Get In Touch</span>
+        <h2 class="mt-4 text-3xl font-bold text-white md:text-4xl" style="font-family: var(--font-display);">
+          We're Here to Help — 24/7
+        </h2>
+        <p class="mt-4 text-white/90">
+          Whether you need emergency care, primary care, or billing help, our team is ready to assist.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="btn-cta-white" href={`${base}contact-us/`}>Contact Us</a>
+          <a class="btn-cta-white" href={`tel:6026717990`}>Call (602) 671-7990</a>
+        </div>
+      </div>
+      <div class="rounded-[20px] bg-white/10 p-6 backdrop-blur-sm">
+        <p class="font-semibold">Fountain Hills Emergency Room and Medical Center</p>
+        <p class="mt-2 text-white/90">9700 N. Saguaro Blvd, Fountain Hills, AZ 85268</p>
+        <p class="mt-2 text-white/90">ER: (602) 671-7990 · Clinic: (602) 671-7981</p>
+      </div>
+    </div>
+  </section>
+
+  <HelpTrio />
+
+  <section class="bg-white py-[70px]">
+    <div class="container-home">
+      <span class="pill-label">Meet Our Leaders</span>
+      <h2 class="section-title mt-4">Experienced Leadership You Can Trust</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          [
+            { name: 'Meka Ezeume, MD, FACHE', role: 'President and CEO', img: 'Ellipse-9.png' },
+            { name: 'Sandeep Yarlagadda, MD', role: 'EVP & Chief Medical Officer', img: 'Ellipse-10.png' },
+            { name: 'Scott Schleifer, DO', role: 'VP of Operations & EM Medical Director', img: 'Ellipse-11.png' },
+            { name: 'Oluchi Ezeume, DNP-AGNPc', role: 'CNO / Lead Nurse Practitioner', img: 'Ellipse-12.png' },
+          ].map((l) => (
+            <article class="rounded-[20px] border border-[#eee] p-5 text-center">
+              <img src={`${base}images/${l.img}`} alt={l.name} class="mx-auto mb-4 h-28 w-28 rounded-full object-cover" loading="lazy" />
+              <h3 class="text-lg font-bold" style="font-family: var(--font-display);">{l.name}</h3>
+              <p class="mt-1 text-sm text-muted">{l.role}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="mt-8 text-center">
+        <a class="btn-cta" href={`${base}meet-our-physicians/`}>View All Meet Our Team Members →</a>
+      </div>
+    </div>
+  </section>
+
+  <Reviews />
+  <BlogStrip />
+</Layout>

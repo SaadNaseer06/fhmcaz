@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import HelpTrio from '../components/HelpTrio.astro';
+import BlogStrip from '../components/BlogStrip.astro';
+import Reviews from '../components/Reviews.astro';
+import { leaders } from '../data/content';
+
+const base = import.meta.env.BASE_URL;
+const photos: Record<string, string> = {
+  'Meka Ezeume, MD, FACHE': 'Ellipse-9.png',
+  'Sandeep Yarlagadda, MD': 'Ellipse-10.png',
+  'Scott Schleifer, DO': 'Ellipse-11.png',
+  'Oluchi Ezeume, DNP-AGNPc': 'Ellipse-12.png',
+};
+---
+
+<Layout title="Meet Our Leadership" description="Leadership team at Fountain Hills Emergency Room and Medical Center.">
+  <PageHero title="Meet Our Leadership" subtitle="Experienced leadership you can trust." crumbs={[{ label: 'Meet Our Leadership' }]} />
+
+  <section class="bg-white py-[70px]">
+    <div class="container-home grid gap-8 md:grid-cols-2">
+      {
+        leaders.map((l) => (
+          <article class="flex gap-5 rounded-[20px] border border-[#eee] p-6">
+            <img
+              src={`${base}images/${photos[l.name] || 'Ellipse-15-1.png'}`}
+              alt={l.name}
+              class="h-24 w-24 shrink-0 rounded-full object-cover"
+              loading="lazy"
+            />
+            <div>
+              <h2 class="text-xl font-bold" style="font-family: var(--font-display);">{l.name}</h2>
+              <p class="mt-1 text-brand">{l.role}</p>
+              <p class="prose-site mt-3">
+                Dedicated to exceptional, patient-centered care focused on prevention, wellness, and long-term health management for our community.
+              </p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    <div class="container-home mt-10 text-center">
+      <a class="btn-cta" href={`${base}meet-our-physicians/`}>View All Physicians →</a>
+    </div>
+  </section>
+
+  <Reviews />
+  <BlogStrip />
+  <HelpTrio />
+</Layout>

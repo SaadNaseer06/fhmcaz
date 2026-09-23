@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+
+<Layout title="Privacy Policy" description="Privacy policy for Fountain Hills Emergency Room and Medical Center.">
+  <PageHero title="Privacy Policy" crumbs={[{ label: 'Privacy Policy' }]} />
+
+  <section class="section bg-white">
+    <div class="container-home max-w-3xl space-y-8 prose-site">
+      <div>
+        <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display);">Who we are</h2>
+        <p class="mt-3">Our website address is: {site.url}</p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display);">SMS Data Sharing</h2>
+        <p class="mt-3">We do NOT share any of your personal SMS information with any third parties for Marketing/promotional purposes.</p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display);">Text Messaging</h2>
+        <p class="mt-3">
+          Text Message Opt-Out: If you are receiving text messages from us and wish to stop receiving them, simply respond with either “STOP” or “UNSUBSCRIBE” to the number from which you received the message.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display);">Privacy of Phone Numbers</h2>
+        <p class="mt-3">Mobile information will not be shared, sold, or conveyed to third parties for marketing/promotional purposes.</p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display);">Cookies</h2>
+        <p class="mt-3">
+          If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display);">What personal information do we collect?</h2>
+        <p class="mt-3">
+          When opting in on requests — including newsletters, service requests, quote requests, ordering, or registering — you may be asked to enter your name, email address, phone number, company name, or other details to help you with your experience.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display);">How We Use Your Information</h2>
+        <ul class="mt-3 list-disc space-y-2 pl-5">
+          <li>Provide information, products, or services you request.</li>
+          <li>Fulfill any other purpose for which you provide the information.</li>
+          <li>Notify you about changes to our website or services.</li>
+          <li>Improve our website, services, and customer service.</li>
+          <li>Respond to your inquiries and fulfill your requests.</li>
+        </ul>
+        <p class="mt-3">No mobile information will be shared with third parties/affiliates for marketing/promotional purposes.</p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display);">Your rights</h2>
+        <p class="mt-3">
+          You can request an export of the personal data we hold about you, or request that we erase personal data we hold about you (except data we are obliged to keep for administrative, legal, or security purposes).
+        </p>
+      </div>
+
+      <div>
+        <h2 class="text-2xl font-bold text-ink" style="font-family: var(--font-display);">Find Us</h2>
+        <p class="mt-3">Main Line — {site.phones.er}</p>
+        <p>{site.address.full}</p>
+      </div>
+    </div>
+  </section>
+</Layout>

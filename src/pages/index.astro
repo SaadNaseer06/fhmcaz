@@ -1,0 +1,567 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import { fetchPosts, postCard } from '../lib/wp';
+
+const base = import.meta.env.BASE_URL;
+const posts = (await fetchPosts(3)).slice(0, 3).map(postCard);
+
+const slides = [
+  {
+    eyebrow: 'Fountain Hills Emergency Room and Medical Center',
+    titleHtml: '24/7 Emergency<br />Room Serving <br />Fountain Hills and <br />Surrounding Areas.',
+    text: 'Get fast, compassionate, and reliable care, any time, day or night. At Fountain Hills Emergency Room and Medical Center our board-certified, emergency physicians and experienced medical staff are available 24/7 to treat all medical emergency needs for patients of all ages across Fountain Hills, Rio Verde, Scottsdale and surrounding communities.',
+    image: 'Group-1463-1.png',
+    cta: 'Visit Our ER Now',
+    href: 'fountain-hills-24-7emergency-room/',
+  },
+  {
+    eyebrow: 'Fountain Hills Emergency Room and Medical Center',
+    titleHtml: 'Guaranteed Care <br />from Expert, Board-<br />Certified Physicians <br />Every Time.',
+    text: 'At Fountain Hills Emergency Room and Medical Center, we believe quality healthcare shouldn’t come with financial stress. That’s why we offer the Instinctive HealthPass Program — designed to make emergency and routine care affordable for everyone.',
+    image: 'sggsgsh.png',
+    cta: 'Visit Our ER Now',
+    href: 'fountain-hills-24-7emergency-room/',
+  },
+  {
+    eyebrow: 'Fountain Hills Emergency Room and Medical Center',
+    titleHtml: 'Tired of Medical Bills? <br />We Can Help.',
+    text: 'At Fountain Hills Emergency Room and Medical Center, we’re committed to providing round-the-clock emergency and primary care with compassion, expertise, and respect. Our experienced medical team delivers fast, reliable treatment — ensuring your health & comfort come first, no matter the hour.',
+    image: 'gdgasfgafa.png',
+    cta: 'Visit Our ER Now',
+    href: 'fountain-hills-24-7emergency-room/',
+  },
+];
+
+const redFeatures = [
+  {
+    title: 'Patient First Emergency Care',
+    text: 'Your comfort and safety always come first with personalized, individually focused medical attention.',
+  },
+  {
+    title: 'In-House Labs and Imaging for Faster Results',
+    text: 'We use on-site imaging, in-house lab testing, and innovative tools for rapid, accurate treatment.',
+  },
+  {
+    title: 'Board-Certified Physicians 24/7',
+    text: 'Our board-certified physicians and nurses deliver 24/7 emergency services you can rely on',
+  },
+];
+
+const services = [
+  {
+    title: '24/7 Emergency Room',
+    text: 'Open 24/7, no appointment needed. Our board-certified physicians treat emergencies with expert, rapid care in Fountain Hills, Rio Verde, Scottsdale, and surrounding communities.',
+    image: 'service-01.jpg.png',
+    icon: 'BackgroundBorder.svg',
+    href: 'fountain-hills-24-7emergency-room/',
+  },
+  {
+    title: 'In-House Labs and Imaging',
+    text: 'On-site CT scans, X-rays, ultrasounds, and lab testing provide rapid, accurate results for emergency and routine needs.',
+    image: 'service-01.jpg-1.png',
+    icon: 'BackgroundBorder-1.svg',
+    href: 'fountain-hills-primary-care-clinic/',
+  },
+  {
+    title: '24/7 In-House Medication Services',
+    text: 'Our in-house pharmacy ensures timely medications and immediate treatment decisions, improving recovery and patient safety.',
+    image: 'service-01.jpg-2.png',
+    icon: 'BackgroundBorder-2.svg',
+    href: 'fountain-hills-24-7emergency-room/',
+  },
+];
+
+const why = [
+  {
+    n: '01.png',
+    icon: 'Background-13.png',
+    title: 'You come first',
+    text: 'Every patient receives personalized, compassionate care with respect, empathy, and trust.',
+  },
+  {
+    n: '02.png',
+    icon: 'Background-14.png',
+    title: 'In-House Labs and Imaging',
+    text: 'Advanced imaging and lab testing ensures rapid, accurate results for emergency needs.',
+  },
+  {
+    n: '03.png',
+    icon: 'Background-15.png',
+    title: 'Clear Answers, Confident Care',
+    text: 'We prioritize communication and patient education, helping you stay informed every step of the way.',
+  },
+  {
+    n: '04.png',
+    icon: 'Background-16.png',
+    title: 'Decades of Experience',
+    text: 'Our board-certified emergency physicians deliver trusted care for families in Fountain Hills, Rio Verde, Scottsdale, and surrounding communities — 24/7.',
+  },
+];
+---
+
+<Layout title={site.name}>
+  <!-- §1 Hero — shared EKG bg only (never use Group-1839/1840: those already include doctors) -->
+  <section class="hero-slider relative overflow-hidden bg-[#C0212F]" data-hero-slider style="min-height: 82vh;">
+    <script
+      is:inline
+      type="application/json"
+      id="hero-slides"
+      set:html={JSON.stringify(
+        slides.map((s) => ({
+          eyebrow: s.eyebrow,
+          titleHtml: s.titleHtml,
+          text: s.text,
+          cta: s.cta,
+          href: `${base}${s.href}`,
+          image: `${base}images/${s.image}`,
+        })),
+      )}
+    />
+
+    <!-- Opaque brand + EKG pattern only — portraits live in the isolate PNGs -->
+    <div class="absolute inset-0 bg-[#C0212F]" aria-hidden="true"></div>
+    <div
+      class="hero-bg absolute inset-0 hidden bg-cover bg-center md:block"
+      style={`background-image:url('${base}images/Section-2.png');`}
+      aria-hidden="true"
+    ></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-[#8B0E1A]/85 via-[#C0212F]/55 to-transparent" aria-hidden="true"></div>
+
+    <div class="container-home relative z-10 grid min-h-[82vh] items-center gap-6 py-12 lg:grid-cols-2">
+      <div class="hero-copy max-w-[640px] text-white" data-hero-copy>
+        <h4
+          class="mb-3 text-sm font-semibold md:text-base"
+          style="font-family: var(--font-display); color: #61ce70;"
+          data-hero-eyebrow
+        >
+          {slides[0].eyebrow}
+        </h4>
+        <h1
+          class="font-bold text-white"
+          style="font-family: var(--font-display); font-size: clamp(1.75rem, 4.5vw, 4.2rem); line-height: 1.1;"
+          data-hero-title
+          set:html={slides[0].titleHtml}
+        />
+        <p class="mt-5 text-sm text-white/95 md:text-base" style="font-family: var(--font-display);" data-hero-text>
+          {slides[0].text}
+        </p>
+        <a
+          href={`${base}${slides[0].href}`}
+          class="mt-8 inline-flex items-center gap-2 rounded-[30px] bg-white px-5 py-2.5 text-base font-semibold text-ink hover:bg-pink hover:text-brand"
+          style="font-family: var(--font-display);"
+          data-hero-cta
+        >
+          <span data-hero-cta-label>{slides[0].cta}</span>
+          <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><polyline fill="none" stroke="currentColor" points="10 5 15 9.5 10 14"></polyline><line fill="none" stroke="currentColor" x1="4" y1="9.5" x2="15" y2="9.5"></line></svg>
+        </a>
+      </div>
+
+      <div class="hero-media relative mx-auto flex w-full max-w-[520px] items-end justify-center lg:max-w-none lg:justify-end">
+        <img
+          src={`${base}images/${slides[0].image}`}
+          alt=""
+          class="hero-img h-auto max-h-[70vh] w-full object-contain lg:max-h-[82vh]"
+          width="647"
+          height="758"
+          data-hero-img
+          draggable="false"
+        />
+      </div>
+    </div>
+
+    <div class="pointer-events-none absolute right-0 top-0 z-20 hidden h-full w-10 flex-col items-center justify-center gap-3 xl:flex">
+      <img src={`${base}images/Gradient.png`} alt="" class="h-[40%] w-2 object-cover" />
+      <div class="pointer-events-auto flex flex-col gap-2">
+        <a href={site.social.facebook} class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#A80E0E] shadow" aria-label="Facebook" rel="noopener" target="_blank">
+          <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 13.5h2.5l.5-3H14v-1.5c0-.9.2-1.5 1.5-1.5H17V4.5h-2c-2.5 0-4 1.5-4 4V10.5H9v3h2V20h3v-6.5z"/></svg>
+        </a>
+        <a href={site.social.instagram} class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#A80E0E] shadow" aria-label="Instagram" rel="noopener" target="_blank">
+          <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+        </a>
+      </div>
+      <img src={`${base}images/Gradient-1.png`} alt="" class="h-[40%] w-2 object-cover" />
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-2.5">
+      {
+        slides.map((_, i) => (
+          <button
+            type="button"
+            class:list={['h-2.5 w-2.5 rounded-full border-2 border-white transition', i === 0 ? 'bg-white scale-110' : 'bg-transparent']}
+            data-dot={i}
+            aria-label={`Slide ${i + 1}`}
+          />
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- §2 About — matches WP collage -->
+  <section class="bg-white py-[78px]">
+    <div class="container-home grid items-center gap-10 lg:grid-cols-2">
+      <div class="relative pb-10" data-animate="left">
+        <img
+          src={`${base}images/universal-healthcare.jpg`}
+          alt="Emergency care"
+          class="w-full rounded-xl object-cover shadow-md"
+          loading="lazy"
+        />
+        <img
+          src={`${base}images/skilled-home-health-care.jpg`}
+          alt="Skilled care"
+          class="absolute -bottom-2 right-0 w-[51%] rounded-xl border-4 border-white object-cover shadow-lg"
+          loading="lazy"
+        />
+      </div>
+      <div class="lg:pl-6" data-animate="right" style="--delay:120ms">
+        <span class="pill-label">About Us</span>
+        <h2 class="section-title mt-5">Excellence in Emergency Care, Compassion in Every Step</h2>
+        <p class="prose-site mt-4 border-b border-[#E8E8E8] pb-[26px]">
+          At Fountain Hills Emergency Room and Medical Center, our board-certified physicians deliver 24/7 emergency services using a best practice, patient-first approach. Fast, compassionate treatment, keeping surrounding communities healthy, day and night.
+        </p>
+        <div class="mt-6 grid gap-5 sm:grid-cols-2">
+          <div class="flex gap-3">
+            <img src={`${base}images/Background-11.png`} alt="" class="h-14 w-14 shrink-0 object-contain" />
+            <div>
+              <h3 class="text-xl font-semibold text-ink" style="font-family: var(--font-display);">More Experience</h3>
+              <p class="mt-1 text-sm text-muted">Emergency care for all age groups.</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <img src={`${base}images/Background-12.png`} alt="" class="h-14 w-14 shrink-0 object-contain" />
+            <div>
+              <h3 class="text-xl font-semibold text-ink" style="font-family: var(--font-display);">Innovation & Impact</h3>
+              <p class="mt-1 text-sm text-muted">Best practice, patient-first approach for faster, safer results.</p>
+            </div>
+          </div>
+        </div>
+        <a class="btn-cta mt-8" href={`${base}about-fountain-hills-medical-center/`}>
+          Know More About Us
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/20">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- §3 Red feature strip -->
+  <section
+    class="bg-cover bg-right-top py-[85px] text-white"
+    style={`background-image:url('${base}images/Group-1-16.png');`}
+  >
+    <div class="container-home grid gap-8 md:grid-cols-3">
+      {
+        redFeatures.map((f, idx) => (
+          <div class="text-center md:text-left" data-animate style={`--delay:${idx * 100}ms`}>
+            <img src={`${base}images/Background-1.svg`} alt="" class="mx-auto mb-4 h-[109px] w-[109px] md:mx-0" />
+            <h3 class="text-[26px] font-bold text-white" style="font-family: var(--font-display);">{f.title}</h3>
+            <p class="mt-3 text-base text-white/90">{f.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- §4 Services -->
+  <section class="bg-gray py-[67px]">
+    <div class="container-home">
+      <div class="mx-auto max-w-3xl text-center" data-animate>
+        <span class="pill-label">Our Services</span>
+        <h2 class="section-title mt-5">Comprehensive Medical Care for Every Need</h2>
+      </div>
+      <div class="mt-12 grid gap-8 md:grid-cols-3">
+        {
+          services.map((s, idx) => (
+            <article class="overflow-hidden rounded-b-[20px] bg-white pb-5 pl-[18px] pr-[33px]" data-animate style={`--delay:${idx * 100}ms`}>
+              <div class="relative -mx-[18px] mb-8 pr-0">
+                <img src={`${base}images/${s.image}`} alt={s.title} class="aspect-[16/11] w-full object-cover" loading="lazy" />
+                <img
+                  src={`${base}images/${s.icon}`}
+                  alt=""
+                  class="absolute -bottom-[34px] left-6 h-[68px] w-[68px]"
+                />
+              </div>
+              <h3 class="mt-6 text-2xl font-bold text-ink" style="font-family: var(--font-display);">{s.title}</h3>
+              <p class="prose-site mt-3">{s.text}</p>
+              <a class="mt-4 inline-block font-semibold text-brand" href={`${base}${s.href}`}>Learn more →</a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- §5 Contact CTA -->
+  <section
+    class="bg-cover bg-center py-[100px] text-white"
+    style={`background-image:url('${base}images/Group-1586-1.png');`}
+  >
+    <div class="container-home grid items-center gap-10 lg:grid-cols-2 lg:pr-[120px]">
+      <div data-animate="left">
+        <span class="pill-label">Appointment</span>
+        <h2 class="mt-5 font-bold text-white" style="font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 3rem);">
+          Contact Us Today & Get the Care You Deserve
+        </h2>
+        <p class="mt-4 text-base text-white/95">
+          Your health matters, and we’re here 24/7 to deliver the care you need, when you need it. Whether it’s an emergency or an injury, Fountain Hills Emergency Room and Medical Center is always open.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+          <a class="btn-cta-white" href={`${base}contact-us/`}>Contact Us Now</a>
+          <a class="inline-flex items-center gap-3 font-semibold text-white" href={`tel:${site.phones.erTel}`}>
+            <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand">📞</span>
+            <span>
+              <span class="block text-sm font-normal opacity-90">Call Anytime 24/7</span>
+              {site.phones.er}
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="relative" data-animate="right" style="--delay:120ms">
+        <img src={`${base}images/appointment.jpg.png`} alt="Book an appointment" class="w-full rounded-xl" loading="lazy" />
+        <img src={`${base}images/Group-1-17.png`} alt="" class="absolute -left-4 top-1/2 hidden w-[19%] -translate-y-1/2 lg:block" />
+      </div>
+    </div>
+  </section>
+
+  <!-- §6 Why Choose Us -->
+  <section class="bg-white py-[70px]">
+    <div class="container-home grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+      <div data-animate="left">
+        <span class="pill-label">Why Choose Us</span>
+        <h2 class="section-title mt-5" style="line-height: 60px;">
+          Why People Choose Fountain Hills Emergency Room & Medical Center?
+        </h2>
+        <p class="prose-site mt-4">
+          At Fountain Hills Emergency Room and Medical Center, we combine advanced emergency care with compassion and experience. Our board-certified physicians and skilled staff provide 24/7 treatment using cutting-edge diagnostic tools, ensuring fast, reliable, and personalized medical care when every second counts.
+        </p>
+        <a class="btn-cta mt-8" href={`${base}fountain-hills-primary-care-clinic/`}>
+          Explore Our Services
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/20">→</span>
+        </a>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {
+          why.map((w, idx) => (
+            <article class="rounded-[20px] bg-card p-[23px] transition hover:bg-pink hover:-translate-y-1 hover:shadow-md" data-animate style={`--delay:${idx * 80}ms`}>
+              <div class="mb-3 flex items-center justify-between">
+                <img src={`${base}images/${w.icon}`} alt="" class="h-12 w-12 object-contain" />
+                <img src={`${base}images/${w.n}`} alt="" class="h-8 w-auto opacity-40" />
+              </div>
+              <h3 class="text-2xl font-bold text-black" style="font-family: Roboto, var(--font-display), sans-serif;">
+                {w.title}
+              </h3>
+              <p class="prose-site mt-2 text-sm">{w.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- §7 We Are Skilled -->
+  <section class="bg-white pb-[70px]">
+    <div class="container-home grid items-center gap-10 lg:grid-cols-2">
+      <img src={`${base}images/skill-01.png.png`} alt="Skilled emergency team" class="w-full rounded-xl" loading="lazy" data-animate="left" />
+      <div data-animate="right" style="--delay:120ms">
+        <span class="pill-label">We Are Skilled</span>
+        <h2 class="section-title mt-5">Leading Emergency Healthcare Expertise You Can Trust</h2>
+        <p class="prose-site mt-4">
+          At Fountain Hills Emergency Room and Medical Center, our board-certified physicians and skilled medical staff deliver trusted 24/7 emergency care. With decades of experience and advanced technology, we’re dedicated to fast, accurate, and compassionate treatment. We are committed to exceptional, expert-driven care right here in Fountain Hills, Arizona.
+        </p>
+        <a class="btn-cta mt-8" href={`${base}meet-our-physicians/`}>
+          Explore Our Services
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/20">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- §8 Testimonials -->
+  <section class="bg-gray pb-[104px] pt-[61px]">
+    <div class="container-home">
+      <div class="mx-auto max-w-3xl text-center" data-animate>
+        <span class="pill-label">Testimonials</span>
+        <h2 class="section-title mt-5">Hear from the People Who Trust Us Most</h2>
+        <p class="mt-3 text-lg font-semibold text-brand">4.8★ on Google — Fountain Hills Emergency Room And Medical Center</p>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {
+          [
+            { name: 'Verified Patient', text: 'From the moment I arrived, the ER staff made me feel calm and cared for. The team was fast, professional, and compassionate.' },
+            { name: 'Verified Patient', text: "I've come for both urgent and routine visits, and every time the staff impress me with their kindness and efficiency." },
+            { name: 'Verified Patient', text: 'The HealthPass program has truly changed my experience with healthcare. Affordable, worry-free access to quality medical services.' },
+          ].map((r, idx) => (
+            <blockquote class="rounded-[20px] border border-line bg-white p-6 shadow-sm" data-animate style={`--delay:${idx * 100}ms`}>
+              <div class="mb-3 flex items-center justify-between">
+                <span class="text-brand" aria-hidden="true">★★★★★</span>
+                <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[#4285F4] text-xs font-bold text-white" aria-hidden="true">G</span>
+              </div>
+              <p class="prose-site">“{r.text}”</p>
+              <footer class="mt-4 text-sm font-semibold text-ink">— {r.name}</footer>
+            </blockquote>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- §9 Blog -->
+  <section class="bg-white py-[51px]">
+    <div class="mx-auto max-w-[1320px] px-4 sm:px-6">
+      <div class="mx-auto max-w-3xl text-center" data-animate>
+        <span class="pill-label">Our Blog</span>
+        <h2 class="section-title mt-5" style="line-height: 60px;">Latest Articles & Health Insights</h2>
+        <p class="prose-site mt-4">
+          Stay informed with expert tips and trusted advice from the team at Fountain Hills Emergency Room and Medical Center.
+        </p>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-3">
+        {
+          posts.length > 0 ? (
+            posts.map((p, idx) => (
+              <article class="overflow-hidden rounded-[10px] bg-card transition hover:-translate-y-1 hover:shadow-md" data-animate style={`--delay:${idx * 100}ms`}>
+                <div class="relative">
+                  {p.image ? (
+                    <img src={p.image} alt={p.alt} class="aspect-[16/10] w-full rounded-[10px] object-cover" loading="lazy" />
+                  ) : (
+                    <div class="aspect-[16/10] bg-gray" />
+                  )}
+                  <span class="absolute left-[21px] top-[21px] rounded-full bg-brand px-[19px] py-2 text-sm text-white">
+                    Fountain Hills ER
+                  </span>
+                </div>
+                <div class="p-5">
+                  <p class="text-sm text-soft">By Admin / {p.date}</p>
+                  <h3 class="mt-2 text-2xl font-bold leading-[35px] text-ink" style="font-family: var(--font-display);">
+                    <a class="hover:text-brand" href={`${base}blogs/${p.slug}/`}>
+                      {p.title}
+                    </a>
+                  </h3>
+                  <a
+                    class="mt-4 inline-flex items-center gap-2 border-b border-black pb-0.5 text-xl font-semibold text-black hover:border-brand hover:text-brand"
+                    style="font-family: var(--font-display);"
+                    href={`${base}blogs/${p.slug}/`}
+                  >
+                    Read More →
+                  </a>
+                </div>
+              </article>
+            ))
+          ) : (
+            <p class="prose-site md:col-span-3 text-center">Blog posts load from WordPress at build time.</p>
+          )
+        }
+      </div>
+      <div class="mt-10 text-center" data-animate>
+        <a class="btn-cta" href={`${base}blogs/`}>
+          View More Blog
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/20">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pre-footer CTA band matching Elementor CtaBand style -->
+  <section class="bg-white pb-16">
+    <div class="container-home">
+      <div class="grid items-center gap-8 rounded-[30px] bg-brand px-8 py-12 text-white md:grid-cols-2 md:px-12" data-animate="scale">
+        <div>
+          <h2 class="text-3xl font-bold text-white md:text-4xl" style="font-family: var(--font-display);">
+            We’re Here to Help — 24/7
+          </h2>
+          <p class="mt-3 text-white/90">Find Us · Fountain Hills Emergency Room and Medical Center</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a class="btn-cta-white" href={`${base}contact-us/`}>Contact Us</a>
+            <a class="btn-cta-white border-white bg-transparent text-white hover:bg-white hover:text-brand" href={site.maps} rel="noopener" target="_blank">
+              View on Google Maps
+            </a>
+          </div>
+        </div>
+        <div class="space-y-3 text-white/95">
+          <p><strong>Address:</strong> {site.address.full}</p>
+          <p><strong>ER:</strong> <a href={`tel:${site.phones.erTel}`}>{site.phones.er}</a></p>
+          <p><strong>Billing:</strong> <a href={`tel:${site.phones.billingTel}`}>{site.phones.billing}</a></p>
+          <p>Patient Portal — access lab results, visit summaries, and prescriptions anytime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const root = document.querySelector('[data-hero-slider]') as HTMLElement | null;
+  const dataEl = document.getElementById('hero-slides');
+  if (root && dataEl) {
+    type Slide = {
+      eyebrow: string;
+      titleHtml: string;
+      text: string;
+      cta: string;
+      href: string;
+      image: string;
+    };
+    const slides = JSON.parse(dataEl.textContent || '[]') as Slide[];
+    const dots = [...root.querySelectorAll<HTMLElement>('[data-dot]')];
+    const img = root.querySelector<HTMLImageElement>('[data-hero-img]');
+    const eyebrow = root.querySelector<HTMLElement>('[data-hero-eyebrow]');
+    const title = root.querySelector<HTMLElement>('[data-hero-title]');
+    const text = root.querySelector<HTMLElement>('[data-hero-text]');
+    const cta = root.querySelector<HTMLAnchorElement>('[data-hero-cta]');
+    const ctaLabel = root.querySelector<HTMLElement>('[data-hero-cta-label]');
+
+    let i = 0;
+    let locked = false;
+    let timer: ReturnType<typeof setInterval> | undefined;
+
+    const apply = (slide: Slide) => {
+      if (eyebrow) eyebrow.textContent = slide.eyebrow;
+      if (title) title.innerHTML = slide.titleHtml;
+      if (text) text.textContent = slide.text;
+      if (cta) cta.href = slide.href;
+      if (ctaLabel) ctaLabel.textContent = slide.cta;
+      if (img) img.src = slide.image;
+    };
+
+    const show = (n: number) => {
+      if (locked || slides.length < 2) return;
+      const next = (n + slides.length) % slides.length;
+      if (next === i) return;
+      locked = true;
+      root.classList.add('is-fading');
+
+      window.setTimeout(() => {
+        apply(slides[next]);
+        i = next;
+        dots.forEach((el, idx) => {
+          el.classList.toggle('bg-white', idx === i);
+          el.classList.toggle('scale-110', idx === i);
+          el.classList.toggle('bg-transparent', idx !== i);
+        });
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            root.classList.remove('is-fading');
+            locked = false;
+          });
+        });
+      }, 380);
+    };
+
+    const restart = () => {
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => show(i + 1), 7000);
+    };
+
+    slides.slice(1).forEach((s) => {
+      const pre = new Image();
+      pre.src = s.image;
+    });
+
+    dots.forEach((el, idx) =>
+      el.addEventListener('click', () => {
+        show(idx);
+        restart();
+      }),
+    );
+    restart();
+  }
+</script>

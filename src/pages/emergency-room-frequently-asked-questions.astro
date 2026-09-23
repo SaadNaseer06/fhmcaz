@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import HelpTrio from '../components/HelpTrio.astro';
+import BlogStrip from '../components/BlogStrip.astro';
+import Reviews from '../components/Reviews.astro';
+import { erFaqs } from '../data/content';
+---
+
+<Layout title="ER Frequently Asked Questions" description="Emergency room FAQs for Fountain Hills 24/7 ER.">
+  <PageHero
+    title="ER Frequently Asked Questions"
+    subtitle="Emergency Room General FAQs"
+    crumbs={[
+      { label: '24/7 Emergency Room', href: '/fountain-hills-24-7emergency-room/' },
+      { label: 'ER FAQs' },
+    ]}
+  />
+  <FaqAccordion items={erFaqs} title="Emergency Room General FAQs" />
+  <HelpTrio />
+  <Reviews />
+  <BlogStrip />
+</Layout>

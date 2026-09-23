@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import HelpTrio from '../components/HelpTrio.astro';
+import BlogStrip from '../components/BlogStrip.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import { billingFaqs } from '../data/content';
+import { site } from '../data/site';
+
+const base = import.meta.env.BASE_URL;
+
+const primaryFaqs = billingFaqs.slice(0, 5);
+const erFaqs = [
+  {
+    q: 'Does the ER balance bill?',
+    a: 'Fountain Hills Emergency Room and Medical Center never balance bills, even for out-of-network patients. We honor all in-network benefits for emergency and observation services.',
+  },
+  {
+    q: 'How will I be billed after an ER visit?',
+    a: 'You’ll receive an Explanation of Benefits (EOB) from your insurance company, not a bill. Once your insurer processes the claim, we’ll send a clear, itemized statement if applicable.',
+  },
+  {
+    q: 'What is an EOB?',
+    a: 'An EOB is a summary from your insurance company showing what services were covered and paid. It is not a bill — just a record of how your insurance processed your visit.',
+  },
+  {
+    q: 'What if I don’t understand my bill?',
+    a: `Please call our billing department at ${site.phones.billing}. Our team will review your statement, explain all charges, and ensure your insurance coverage is properly applied.`,
+  },
+  {
+    q: 'Are emergency services available 24/7?',
+    a: 'Yes. Our Emergency Room in Fountain Hills is open 24 hours a day, 7 days a week.',
+  },
+];
+---
+
+<Layout title="Billing Questions" description="Insurance and billing FAQs for Fountain Hills Emergency Room and Medical Center.">
+  <PageHero title="Billing Questions" crumbs={[{ label: 'Billing Questions' }]} />
+
+  <section class="bg-white py-[70px]">
+    <div class="container-home grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+      <div class="space-y-10">
+        <div>
+          <h2 class="text-2xl font-bold" style="font-family: var(--font-display);">Primary Care / Urgent Care — Insurance & Billing FAQs</h2>
+          <div class="mt-4">
+            <FaqAccordion items={primaryFaqs} title="" showHeader={false} />
+          </div>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold" style="font-family: var(--font-display);">Emergency Room — Insurance & Billing FAQs</h2>
+          <div class="mt-4">
+            <FaqAccordion items={erFaqs} title="" showHeader={false} />
+          </div>
+        </div>
+      </div>
+      <img src={`${base}images/New-Project-2.jpg`} alt="Billing support" class="w-full rounded-xl lg:sticky lg:top-28" loading="lazy" />
+    </div>
+
+    <div class="container-home mt-12 rounded-[20px] border border-[#eee] p-8 text-center">
+      <p class="prose-site">
+        If you have any billing questions, contact our specialists at
+        <a class="font-semibold text-brand" href={`tel:${site.phones.billingTel}`}>{site.phones.billing}</a>
+        or pay online through the Patient Portal.
+      </p>
+      <a class="btn-cta mt-6" href={site.payBill} rel="noopener" target="_blank">Pay Bill Online →</a>
+    </div>
+  </section>
+
+  <HelpTrio />
+  <BlogStrip />
+</Layout>

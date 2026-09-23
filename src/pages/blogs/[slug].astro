@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { fetchPosts, postCard } from '../../lib/wp';
+
+export async function getStaticPaths() {
+  const posts = await fetchPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const card = postCard(post);
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title={card.title} description={card.excerpt}>
+  <PageHero title={card.title} subtitle={card.date} crumbs={[{ label: 'Blogs', href: '/blogs/' }, { label: card.title }]} />
+
+  <article class="section">
+    <div class="container-site max-w-3xl">
+      {
+        card.image && (
+          <img src={card.image} alt={card.alt} class="mb-8 aspect-[16/9] w-full rounded-2xl object-cover" />
+        )
+      }
+      <div class="prose-site wp-content" set:html={post.content.rendered} />
+      <a class="btn-outline mt-10" href={`${base}blogs/`}>← Back to Blogs</a>
+    </div>
+  </article>
+</Layout>
+
+<style is:global>
+  .wp-content img {
+    margin: 1.5rem 0;
+    height: auto;
+    max-width: 100%;
+    border-radius: 0.75rem;
+  }
+  .wp-content h2,
+  .wp-content h3 {
+    margin: 2rem 0 0.75rem;
+    color: #000;
+  }
+  .wp-content ul {
+    margin: 1rem 0;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+  .wp-content a {
+    color: #c0212f;
+    text-decoration: underline;
+  }
+</style>

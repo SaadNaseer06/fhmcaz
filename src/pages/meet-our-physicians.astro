@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import HelpTrio from '../components/HelpTrio.astro';
+import BlogStrip from '../components/BlogStrip.astro';
+import Reviews from '../components/Reviews.astro';
+import { physicians, leaders } from '../data/content';
+
+const base = import.meta.env.BASE_URL;
+
+const leaderPhotos: Record<string, string> = {
+  'Meka Ezeume, MD, FACHE': 'Ellipse-9.png',
+  'Sandeep Yarlagadda, MD': 'Ellipse-10.png',
+  'Scott Schleifer, DO': 'Ellipse-11.png',
+  'Oluchi Ezeume, DNP-AGNPc': 'Ellipse-12.png',
+};
+---
+
+<Layout title="Meet our Physicians" description="Board-certified physicians at Fountain Hills Emergency Room and Medical Center.">
+  <PageHero
+    title="Meet our Physicians"
+    subtitle="Experienced Leadership You Can Trust"
+    crumbs={[{ label: 'Meet our Physicians' }]}
+  />
+
+  <section class="bg-white py-[70px]">
+    <div class="container-home">
+      <h2 class="section-title text-center">Experienced Leadership You Can Trust</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          leaders.map((l) => (
+            <article class="rounded-[20px] border border-[#eee] p-5 text-center">
+              <img
+                src={`${base}images/${leaderPhotos[l.name] || 'Ellipse-15-1.png'}`}
+                alt={l.name}
+                class="mx-auto mb-4 h-32 w-32 rounded-full object-cover"
+                loading="lazy"
+              />
+              <h3 class="text-lg font-bold" style="font-family: var(--font-display);">{l.name}</h3>
+              <p class="mt-1 text-sm text-brand">{l.role}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <h2 class="section-title mt-16 text-center">Our Physicians</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {
+          physicians
+            .filter((p) => !leaders.some((l) => l.name === p.name))
+            .map((p) => (
+              <article class="rounded-[20px] border border-[#eee] p-5 text-center transition hover:border-brand">
+                <img
+                  src={`${base}images/${p.name.includes('Stavridis') ? 'Ellipse-16.png' : p.name.includes('Mead') ? 'Ellipse-15.png' : 'Ellipse-15-1.png'}`}
+                  alt={p.name}
+                  class="mx-auto mb-4 h-28 w-28 rounded-full object-cover"
+                  loading="lazy"
+                />
+                <h3 class="text-lg font-bold" style="font-family: var(--font-display);">{p.name}</h3>
+                <p class="mt-1 text-sm text-muted">{p.role}</p>
+              </article>
+            ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Reviews />
+  <BlogStrip />
+  <HelpTrio />
+</Layout>

@@ -1,0 +1,293 @@
+@import "tailwindcss";
+@import "@fontsource/rethink-sans/400.css";
+@import "@fontsource/rethink-sans/500.css";
+@import "@fontsource/rethink-sans/600.css";
+@import "@fontsource/rethink-sans/700.css";
+@import "@fontsource/lato/400.css";
+@import "@fontsource/lato/700.css";
+
+@theme {
+  --color-brand: #c0212f;
+  --color-brand-hover: #b32733;
+  --color-brand-dark: #9a1a25;
+  --color-ink: #110204;
+  --color-muted: #595a5c;
+  --color-soft: #7a7a7a;
+  --color-accent: #61ce70;
+  --color-pink: #f4d7da;
+  --color-gray: #f2f2f2;
+  --color-card: #f9f9f9;
+  --color-surface: #f2f2f2;
+  --color-line: #e8e8e8;
+  --color-footer: #110204;
+  --color-footer-muted: #d3c4c6;
+  --font-display: "Rethink Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Lato", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-ink antialiased;
+    font-family: var(--font-body);
+    color: #110204;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: #110204;
+  }
+  a {
+    @apply transition-colors;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-[1140px] px-4 sm:px-6;
+  }
+  .container-home {
+    @apply mx-auto w-full max-w-[1294px] px-4 sm:px-6;
+  }
+
+  .section {
+    @apply py-16 md:py-20;
+  }
+
+  .eyebrow {
+    @apply text-sm font-semibold uppercase tracking-[0.14em] text-brand;
+    font-family: var(--font-display);
+  }
+
+  .pill-label {
+    display: inline-flex;
+    align-items: center;
+    background: #f4d7da;
+    color: #c0212f;
+    border-radius: 47px 47px 47px 56px;
+    padding: 15px 36px 14px 20px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 313px;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 313px;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    background: #c0212f;
+    color: #fff;
+    border: 2px solid #c0212f;
+    transition: all 0.2s ease;
+  }
+  .btn-primary:hover {
+    background: #fff;
+    color: #c0212f;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 313px;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    background: transparent;
+    color: #c0212f;
+    border: 2px solid #c0212f;
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: #c0212f;
+    color: #fff;
+  }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #c0212f;
+    color: #fff;
+    border: 2px solid #c0212f;
+    border-radius: 313px;
+    padding: 4px 11px 4px 20px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 52px;
+  }
+  .btn-cta:hover {
+    background: #fff;
+    color: #c0212f;
+  }
+
+  .btn-cta-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    color: #c0212f;
+    border: 2px solid #fff;
+    border-radius: 313px;
+    padding: 8px 12px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 40px;
+  }
+  .btn-cta-white:hover {
+    background: transparent;
+    color: #fff;
+  }
+
+  .btn-header-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #c0212f;
+    color: #fff;
+    border: 2px solid #c0212f;
+    border-radius: 40px;
+    padding: 2px 4px 2px 20px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 45px;
+  }
+  .btn-header-cta:hover {
+    background: #b32733;
+    border-color: #b32733;
+    color: #fff;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    line-height: 1.2;
+    color: #110204;
+  }
+
+  .prose-site {
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 400;
+    color: #595a5c;
+    line-height: 1.7;
+  }
+}
+
+/* —— Hero slider: one doctor image at a time (shared EKG bg has no portraits) —— */
+.hero-slider .hero-copy,
+.hero-slider .hero-img {
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+.hero-slider.is-fading .hero-copy,
+.hero-slider.is-fading .hero-img {
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-slider.is-fading .hero-copy {
+  transform: translateX(-18px);
+}
+.hero-slider.is-fading .hero-img {
+  transform: translateX(22px) scale(0.97);
+}
+
+/* —— Scroll reveal animations (site-wide) —— */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--delay, 0ms);
+  will-change: opacity, transform;
+}
+[data-animate='fade'] {
+  transform: none;
+}
+[data-animate='left'] {
+  transform: translateX(-40px);
+}
+[data-animate='right'] {
+  transform: translateX(40px);
+}
+[data-animate='scale'] {
+  transform: scale(0.92);
+}
+[data-animate='up'] {
+  transform: translateY(48px);
+}
+[data-animate].is-inview {
+  opacity: 1;
+  transform: none;
+}
+
+/* Soft lift on interactive cards once revealed */
+[data-animate].is-inview.card-lift,
+article[data-animate].is-inview {
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Page hero entrance */
+.page-hero-inner {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: pageHeroIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.08s forwards;
+}
+@keyframes pageHeroIn {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slider .hero-copy,
+  .hero-slider .hero-img,
+  .hero-slider.is-fading .hero-copy,
+  .hero-slider.is-fading .hero-img,
+  .page-hero-inner,
+  [data-animate] {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+}

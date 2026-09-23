@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Reviews from '../components/Reviews.astro';
+import HelpTrio from '../components/HelpTrio.astro';
+import BlogStrip from '../components/BlogStrip.astro';
+import { site } from '../data/site';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Book an Appointment" description="Schedule primary care or urgent care at Fountain Hills Medical Center.">
+  <PageHero
+    title="Book An Appointment"
+    subtitle="Simple primary & urgent care appointments — choose the visit type that fits your needs."
+    crumbs={[
+      { label: 'Primary Care', href: '/fountain-hills-primary-care-clinic/' },
+      { label: 'Book Appointment' },
+    ]}
+  />
+
+  <section class="section bg-white">
+    <div class="container-home grid gap-10 lg:grid-cols-2">
+      <div class="space-y-6">
+        <article class="rounded-[20px] border border-line p-6">
+          <h2 class="text-xl font-bold" style="font-family: var(--font-display);">Primary Care</h2>
+          <p class="prose-site mt-2">Establish care or schedule follow-ups with our clinic team.</p>
+        </article>
+        <article class="rounded-[20px] border border-line p-6">
+          <h2 class="text-xl font-bold" style="font-family: var(--font-display);">Urgent Care</h2>
+          <p class="prose-site mt-2">
+            When illness or minor injury strikes, our urgent care team is here — no appointment needed, just walk in.
+          </p>
+        </article>
+        <p class="prose-site">
+          Clinic phone:
+          <a class="font-semibold text-brand" href={`tel:${site.phones.clinicTel}`}>{site.phones.clinic}</a>
+          · Location: {site.address.line1}
+        </p>
+        <p class="text-sm font-semibold text-brand">For medical emergencies, go to the ER or call 911 — open 24/7.</p>
+        <a class="btn-outline" href={`${base}fountain-hills-24-7emergency-room/`}>Back to ER Services</a>
+      </div>
+      <div>
+        <h2 class="mb-4 text-2xl font-bold" style="font-family: var(--font-display);">Request an Appointment</h2>
+        <ContactForm type="appointment" submitLabel="Request Appointment" />
+      </div>
+    </div>
+  </section>
+
+  <Reviews />
+  <HelpTrio />
+  <BlogStrip />
+</Layout>

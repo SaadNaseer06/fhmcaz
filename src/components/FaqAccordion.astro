@@ -1,0 +1,41 @@
+---
+interface Item {
+  q: string;
+  a: string;
+}
+interface Props {
+  items: Item[];
+  title?: string;
+  showHeader?: boolean;
+}
+const { items, title = 'Frequently Asked Questions', showHeader = true } = Astro.props;
+---
+
+<section class:list={[showHeader ? 'section bg-surface' : '']}>
+  <div class:list={[showHeader ? 'container-site max-w-3xl' : '']}>
+    {
+      showHeader && title && (
+        <>
+          <p class="eyebrow">FAQs</p>
+          <h2 class="mt-2 text-3xl md:text-4xl">{title}</h2>
+        </>
+      )
+    }
+    <div class:list={['space-y-3', showHeader && 'mt-8']}>
+      {
+        items.map((item, i) => (
+          <details class="group rounded-2xl border border-line bg-white p-5 open:shadow-sm" open={i === 0}>
+            <summary class="cursor-pointer list-none text-lg font-semibold text-ink marker:content-none [&::-webkit-details-marker]:hidden" style="font-family: var(--font-display);">
+              <span class="flex items-start justify-between gap-4">
+                {item.q}
+                <span class="text-brand transition group-open:rotate-45">+</span>
+              </span>
+            </summary>
+            <p class="mt-3 prose-site">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+

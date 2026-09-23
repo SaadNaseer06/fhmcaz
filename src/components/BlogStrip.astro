@@ -1,0 +1,56 @@
+---
+import { fetchPosts, postCard } from '../lib/wp';
+const base = import.meta.env.BASE_URL;
+const posts = (await fetchPosts(3)).slice(0, 3).map(postCard);
+---
+
+<section class="bg-white py-[51px]">
+  <div class="mx-auto max-w-[1320px] px-4 sm:px-6">
+    <div class="mx-auto max-w-3xl text-center">
+      <span class="pill-label">Our Blog</span>
+      <h2 class="section-title mt-5">Latest Articles & Health Insights</h2>
+      <p class="prose-site mt-4">
+        Stay informed with expert tips and trusted advice from the team at Fountain Hills Emergency Room and Medical Center.
+      </p>
+    </div>
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        posts.map((p) => (
+          <article class="overflow-hidden rounded-[10px] bg-card">
+            <div class="relative">
+              {p.image ? (
+                <img src={p.image} alt={p.alt} class="aspect-[16/10] w-full rounded-[10px] object-cover" loading="lazy" />
+              ) : (
+                <div class="aspect-[16/10] bg-gray" />
+              )}
+              <span class="absolute left-[21px] top-[21px] rounded-full bg-brand px-[19px] py-2 text-sm text-white">
+                Fountain Hills ER
+              </span>
+            </div>
+            <div class="p-5">
+              <p class="text-sm text-soft">By Admin / {p.date}</p>
+              <h3 class="mt-2 text-2xl font-bold leading-[35px] text-ink" style="font-family: var(--font-display);">
+                <a class="hover:text-brand" href={`${base}blogs/${p.slug}/`}>
+                  {p.title}
+                </a>
+              </h3>
+              <a
+                class="mt-4 inline-flex items-center gap-2 border-b border-black pb-0.5 text-xl font-semibold text-black hover:border-brand hover:text-brand"
+                style="font-family: var(--font-display);"
+                href={`${base}blogs/${p.slug}/`}
+              >
+                Read More →
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+    <div class="mt-10 text-center">
+      <a class="btn-cta" href={`${base}blogs/`}>
+        View More Blog
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/20">→</span>
+      </a>
+    </div>
+  </div>
+</section>

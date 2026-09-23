@@ -1,0 +1,52 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  crumbs?: { label: string; href?: string }[];
+}
+const { title, subtitle, crumbs = [] } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<!-- Matches Elementor inner-page banner: Group-1838, min-height 328px, centered title + breadcrumb -->
+<section
+  class="page-banner relative flex min-h-[328px] items-center justify-center overflow-hidden text-white"
+  style={`background-image: url('${base}images/Group-1838.png'); background-size: cover; background-position: center center;`}
+>
+  <div class="container-home relative page-hero-inner w-full py-12 text-center md:py-14">
+    <h1
+      class="mx-auto max-w-5xl font-bold text-white"
+      style="font-family: Roboto, var(--font-display), sans-serif; font-size: clamp(2.25rem, 6vw, 4.5625rem); line-height: 1.1;"
+    >
+      {title}
+    </h1>
+    {
+      crumbs.length > 0 && (
+        <nav class="mt-4 text-lg font-medium text-white" aria-label="Breadcrumb" style="font-family: var(--font-body);">
+          <ol class="flex flex-wrap items-center justify-center gap-2">
+            <li>
+              <a href={base} class="text-white/95 hover:text-white">
+                Home
+              </a>
+            </li>
+            {crumbs.map((c) => (
+              <li class="flex items-center gap-2">
+                <span aria-hidden="true" class="text-white/80">
+                  &gt;
+                </span>
+                {c.href ? (
+                  <a href={`${base}${c.href.replace(/^\//, '')}`} class="text-white/95 hover:text-white">
+                    {c.label}
+                  </a>
+                ) : (
+                  <span class="text-white">{c.label}</span>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )
+    }
+    {subtitle && <p class="mx-auto mt-4 max-w-2xl text-base text-white/90 md:text-lg">{subtitle}</p>}
+  </div>
+</section>

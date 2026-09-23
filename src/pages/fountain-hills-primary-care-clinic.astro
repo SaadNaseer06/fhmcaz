@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import HelpTrio from '../components/HelpTrio.astro';
+import BlogStrip from '../components/BlogStrip.astro';
+import Reviews from '../components/Reviews.astro';
+import { site } from '../data/site';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="Primary Care & Urgent Care" description="Comprehensive primary care and urgent care in Fountain Hills.">
+  <PageHero
+    title="Fountain Hills Primary Care & Urgent Care Clinic"
+    subtitle="Comprehensive, compassionate care — from routine checkups to same-day visits."
+    crumbs={[{ label: 'Primary Care' }]}
+  />
+
+  <section class="relative overflow-hidden bg-cover bg-center py-20 text-white" style={`background-image:url('${base}images/Group-1770.png');`}>
+    <div class="absolute inset-0 bg-ink/55"></div>
+    <div class="container-home relative grid items-center gap-8 lg:grid-cols-2">
+      <div data-animate="left">
+        <h2 class="text-3xl font-bold text-white md:text-5xl" style="font-family: var(--font-display);">Comprehensive Primary Care</h2>
+        <p class="mt-4 text-white/90">
+          At Fountain Hills Primary Care & Urgent Care Clinic, our mission is to keep you healthy with convenient, compassionate care. From routine checkups to same-day visits, our experienced team provides personalized, high-quality medical care close to home.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a class="btn-cta-white" href={`${base}book-appointments/`}>Book an Appointment</a>
+          <a class="btn-cta-white border-white bg-transparent text-white" href={`tel:${site.phones.clinicTel}`}>{site.phones.clinic}</a>
+        </div>
+      </div>
+      <img src={`${base}images/Group-1654-3.png`} alt="Primary care" class="mx-auto max-h-[420px] w-auto" loading="lazy" data-animate="right" style="--delay:120ms" />
+    </div>
+  </section>
+
+  <section class="bg-ink py-12 text-white">
+    <div class="container-home grid gap-6 md:grid-cols-3">
+      {
+        [
+          { t: 'Walk-In & Same-Day Visits', d: 'Sudden illness or minor injury — no appointment required.' },
+          { t: 'On-Site Lab & Imaging', d: 'Lab testing and X-ray services available for same-day results.' },
+          { t: 'Insurance & Billing Support', d: 'We accept most insurance plans with transparent, simplified billing.' },
+        ].map((c) => (
+          <article class="rounded-[16px] border border-white/15 p-6">
+            <h3 class="text-xl font-bold text-white" style="font-family: var(--font-display);">{c.t}</h3>
+            <p class="mt-3 text-white/80">{c.d}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-white py-[70px]">
+    <div class="container-home grid items-center gap-10 lg:grid-cols-2">
+      <img src={`${base}images/Group-1728-1.png`} alt="Compassionate primary care" class="w-full rounded-xl" loading="lazy" />
+      <div>
+        <h2 class="section-title">Compassionate Primary & Urgent Care For You</h2>
+        <p class="prose-site mt-4">
+          We’re dedicated to providing personalized, preventive, and compassionate care. From same-day urgent visits to routine checkups, our team keeps you and your family healthy — close to home.
+        </p>
+        <ul class="mt-6 space-y-3">
+          <li><strong>Experienced Providers</strong> — Compassionate, personalized care for every age and need.</li>
+          <li><strong>Immediate Care</strong> — Walk in for fast treatment of minor illnesses or injuries.</li>
+          <li><strong>In-House X-rays and Labs</strong> — Smooth, stress-free visits.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cover bg-center py-16 text-white" style={`background-image:url('${base}images/Group-1586-1.png');`}>
+    <div class="container-home grid gap-8 lg:grid-cols-2 lg:items-center">
+      <div>
+        <span class="pill-label">Appointment</span>
+        <h2 class="mt-4 text-3xl font-bold text-white md:text-4xl" style="font-family: var(--font-display);">
+          Simple Primary & Urgent Care Appointments
+        </h2>
+        <p class="mt-4 text-white/90">
+          Your health matters and we’re here to make care simple, convenient, and personal.
+        </p>
+        <p class="mt-4 inline-block rounded-full bg-white px-4 py-2 text-sm font-bold text-brand">PRIMARY CLINIC IS NOT OPEN 24/7</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="btn-cta-white" href={`${base}book-appointments/`}>Book Appointment</a>
+          <a class="btn-cta-white" href={`tel:${site.phones.clinicTel}`}>{site.phones.clinic}</a>
+        </div>
+      </div>
+      <img src={`${base}images/appointment.jpg.png`} alt="Book a clinic appointment" class="mx-auto w-full max-w-lg rounded-xl shadow-lg" loading="lazy" />
+    </div>
+  </section>
+
+  <section class="bg-white py-[70px]">
+    <div class="container-home">
+      <span class="pill-label">Why Choose Us</span>
+      <h2 class="section-title mt-4">Why Choose Fountain Hills Primary Care & Urgent Care?</h2>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          [
+            { img: '11111.png', t: 'Personalized Care', d: 'Attentive care built on trust, respect, and long-term relationships.' },
+            { img: '232222.png', t: 'Convenience That Cares', d: 'Same-day visits, walk-ins, and extended hours.' },
+            { img: '3333334444.png', t: 'Complete Family Services', d: 'From children to seniors — prevention to urgent needs.' },
+            { img: '33333.png', t: 'Board-Certified Clinicians', d: 'High-quality care for the best outcomes every visit.' },
+          ].map((c) => (
+            <article class="rounded-[20px] bg-card p-5">
+              <img src={`${base}images/${c.img}`} alt="" class="mb-4 h-16 w-16 object-contain" />
+              <h3 class="text-lg font-bold" style="font-family: var(--font-display);">{c.t}</h3>
+              <p class="prose-site mt-2 text-sm">{c.d}</p>
+            </article>
+          ))
+        }
+      </div>
+      <img src={`${base}images/New-Project-1.jpg`} alt="Primary care team" class="mt-10 w-full rounded-xl" loading="lazy" />
+    </div>
+  </section>
+
+  <Reviews />
+  <HelpTrio />
+  <BlogStrip />
+</Layout>

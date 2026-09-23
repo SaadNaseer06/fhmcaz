@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import HelpTrio from '../components/HelpTrio.astro';
+import BlogStrip from '../components/BlogStrip.astro';
+import Reviews from '../components/Reviews.astro';
+import { clinicFaqs } from '../data/content';
+---
+
+<Layout title="Medical Clinic FAQs" description="Primary care and urgent care frequently asked questions.">
+  <PageHero
+    title="Frequently Asked Questions"
+    subtitle="Primary Care / Urgent Care FAQs"
+    crumbs={[
+      { label: 'Primary Care', href: '/fountain-hills-primary-care-clinic/' },
+      { label: 'FAQs' },
+    ]}
+  />
+  <FaqAccordion items={clinicFaqs} title="Primary Care / Urgent Care General FAQs" />
+  <HelpTrio />
+  <Reviews />
+  <BlogStrip />
+</Layout>

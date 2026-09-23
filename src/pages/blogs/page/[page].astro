@@ -1,0 +1,115 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import { fetchPosts, postCard } from '../../../lib/wp';
+
+export async function getStaticPaths() {
+  const all = (await fetchPosts()).map(postCard);
+  const PAGE_SIZE = 12;
+  const totalPages = Math.max(1, Math.ceil(all.length / PAGE_SIZE));
+  const paths = [];
+  for (let page = 2; page <= totalPages; page++) {
+    paths.push({
+      params: { page: String(page) },
+      props: {
+        posts: all.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE),
+        page,
+        totalPages,
+      },
+    });
+  }
+  return paths;
+}
+
+const { posts, page, totalPages } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title={`Blogs — Page ${page}`} description="Latest articles and health insights from Fountain Hills Emergency Room and Medical Center.">
+  <PageHero title="Our Blogs" crumbs={[{ label: 'Blog', href: '/blogs/' }, { label: `Page ${page}` }]} />
+
+  <section class="bg-white py-14 md:py-16">
+    <div class="container-home">
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {
+          posts.map((p, idx) => (
+            <article
+              class="group overflow-hidden rounded-[10px] bg-card transition hover:-translate-y-1 hover:shadow-md"
+              data-animate
+              style={`--delay:${(idx % 3) * 80}ms`}
+            >
+              <a href={`${base}blogs/${p.slug}/`} class="relative block">
+                {p.image ? (
+                  <img src={p.image} alt={p.alt} class="aspect-[16/10] w-full object-cover" loading="lazy" />
+                ) : (
+                  <div class="aspect-[16/10] bg-gray" />
+                )}
+                <span class="absolute left-[16px] top-[16px] rounded-full bg-brand px-4 py-1.5 text-sm font-semibold text-white">
+                  Fountain Hills ER
+                </span>
+                <span class="absolute right-[16px] top-[16px] rounded bg-brand px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white">
+                  Latest Blog
+                </span>
+              </a>
+              <div class="p-5">
+                <p class="text-sm text-soft">By Admin / {p.date}</p>
+                <h2 class="mt-2 text-xl font-bold leading-snug text-ink md:text-2xl" style="font-family: var(--font-display);">
+                  <a class="hover:text-brand" href={`${base}blogs/${p.slug}/`}>
+                    {p.title}
+                  </a>
+                </h2>
+                {p.excerpt && <p class="prose-site mt-2 line-clamp-3 text-sm">{p.excerpt}</p>}
+                <a
+                  class="mt-4 inline-flex items-center gap-2 border-b border-black pb-0.5 text-lg font-semibold text-black hover:border-brand hover:text-brand"
+                  style="font-family: var(--font-display);"
+                  href={`${base}blogs/${p.slug}/`}
+                >
+                  Read More →
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <nav class="mt-12 flex flex-wrap items-center justify-center gap-2" aria-label="Pagination" data-animate>
+        {
+          page > 1 && (
+            <a
+              class="rounded-lg border border-line px-3 py-2 text-sm font-semibold text-ink hover:border-brand hover:text-brand"
+              href={page === 2 ? `${base}blogs/` : `${base}blogs/page/${page - 1}/`}
+            >
+              « Prev
+            </a>
+          )
+        }
+        {
+          Array.from({ length: totalPages }, (_, i) => i + 1).map((n) =>
+            n === page ? (
+              <span class="rounded-lg bg-brand px-3 py-2 text-sm font-semibold text-white" aria-current="page">
+                {n}
+              </span>
+            ) : (
+              <a
+                class="rounded-lg border border-line px-3 py-2 text-sm font-semibold text-ink hover:border-brand hover:text-brand"
+                href={n === 1 ? `${base}blogs/` : `${base}blogs/page/${n}/`}
+              >
+                {n}
+              </a>
+            ),
+          )
+        }
+        {
+          page < totalPages && (
+            <a
+              class="rounded-lg border border-line px-3 py-2 text-sm font-semibold text-ink hover:border-brand hover:text-brand"
+              href={`${base}blogs/page/${page + 1}/`}
+            >
+              Next »
+            </a>
+          )
+        }
+      </nav>
+    </div>
+  </section>
+</Layout>

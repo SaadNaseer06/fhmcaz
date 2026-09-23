@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import HelpTrio from '../components/HelpTrio.astro';
+import BlogStrip from '../components/BlogStrip.astro';
+import Reviews from '../components/Reviews.astro';
+import { site } from '../data/site';
+
+const base = import.meta.env.BASE_URL;
+
+const symptoms = [
+  'Abdominal Pain',
+  'Chest Pain / Heart Concerns',
+  'Injuries & Fractures',
+  'Infections & Fever',
+  'Allergic Reactions',
+  'Dehydration',
+  'Breathing Difficulties',
+  'Vomiting / Severe Nausea',
+];
+---
+
+<Layout title="24/7 Emergency Room" description="Fast, compassionate emergency care available 24/7 in Fountain Hills — no appointment needed.">
+  <PageHero
+    title="24/7 Emergency Room"
+    subtitle="Fast, Compassionate Emergency Care, Available 24/7"
+    crumbs={[{ label: '24/7 Emergency Room' }]}
+  />
+
+  <section class="bg-white py-[70px]">
+    <div class="container-home grid items-center gap-10 lg:grid-cols-2">
+      <img src={`${base}images/Image.png`} alt="24/7 Emergency Room" class="w-full rounded-xl" loading="lazy" data-animate="left" />
+      <div data-animate="right" style="--delay:100ms">
+        <h2 class="section-title">Fast, Compassionate Emergency Care, Available 24/7</h2>
+        <div class="prose-site mt-4 space-y-4">
+          <p>
+            At Fountain Hills Emergency Room and Medical Center, we provide 24/7 emergency room care for patients of all ages, no appointment needed. Our board-certified ER physicians and skilled nurses deliver precise, immediate treatment for chest pain, injuries, infections, dehydration, allergic reactions, and other conditions.
+          </p>
+          <p>
+            We have advanced medical technology, including on-site imaging, CT scans, and rapid lab testing, to ensure quick and accurate diagnoses. From the moment you arrive, our team treats every emergency with compassion, expertise, and respect because your health and comfort come first.
+          </p>
+          <p>
+            Whether it’s day or night, weekday or holiday, our Fountain Hills Emergency Room is ready to provide excellent emergency care without long wait times — 24 hours a day, 7 days a week, 365 days a year.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-gray py-[67px]">
+    <div class="container-home grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <span class="pill-label">Our Services</span>
+        <h2 class="section-title mt-4">24/7 Emergency Room Services</h2>
+        <ul class="mt-6 space-y-3">
+          <li class="flex gap-3"><span class="mt-1 text-brand">●</span> On-Site Medication, Imaging, and In-House Labs</li>
+          <li class="flex gap-3"><span class="mt-1 text-brand">●</span> Billing & Financial Assistance</li>
+          <li class="flex gap-3"><span class="mt-1 text-brand">●</span> Board-certified emergency physicians 24/7</li>
+          <li class="flex gap-3"><span class="mt-1 text-brand">●</span> No appointment needed — walk in anytime</li>
+        </ul>
+      </div>
+      <img src={`${base}images/Image-1.png`} alt="ER services" class="w-full rounded-xl" loading="lazy" />
+    </div>
+  </section>
+
+  <section class="bg-brand py-16 text-white">
+    <div class="container-home grid gap-6 md:grid-cols-2 md:items-center" data-animate="up">
+      <div>
+        <h2 class="text-3xl font-bold text-white" style="font-family: var(--font-display);">Have Additional Questions?</h2>
+        <p class="mt-3 text-white/90">{site.address.full}</p>
+        <p class="mt-2"><a class="font-semibold text-white underline" href={`tel:${site.phones.erTel}`}>Emergency Line: {site.phones.er}</a></p>
+        <p class="mt-1"><a class="font-semibold text-white underline" href={`mailto:${site.email}`}>{site.email}</a></p>
+      </div>
+      <div class="md:text-right">
+        <a class="btn-cta-white" href={`${base}contact-us/`}>Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-[70px]">
+    <div class="container-home">
+      <h2 class="section-title text-center">Medical Symptoms Our ER Treats</h2>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          symptoms.map((s) => (
+            <div class="rounded-[16px] border border-[#eee] bg-card px-5 py-4 font-semibold text-ink" style="font-family: var(--font-display);">
+              {s}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <HelpTrio />
+  <Reviews />
+  <BlogStrip />
+</Layout>

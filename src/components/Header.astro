@@ -1,0 +1,197 @@
+---
+import { nav, site, type NavItem } from '../data/site';
+const base = import.meta.env.BASE_URL;
+
+function href(path: string, external?: boolean) {
+  if (external || path.startsWith('http')) return path;
+  return `${base}${path.replace(/^\//, '')}`;
+}
+
+/** Normalize path for active matching (strip base + trailing slash) */
+function norm(path: string) {
+  let p = path.replace(/\\/g, '/');
+  const b = base.replace(/\/+$/, '');
+  if (b && (p === b || p.startsWith(b + '/'))) p = p.slice(b.length) || '/';
+  p = p.replace(/^\/+/, '').replace(/\/+$/, '');
+  return p;
+}
+
+const current = norm(Astro.url.pathname);
+
+function isActive(item: NavItem): boolean {
+  if (item.external) return false;
+  const itemPath = norm(item.href);
+  // Home
+  if (!itemPath) return !current;
+  if (current === itemPath || current.startsWith(itemPath + '/')) return true;
+  return (
+    item.children?.some((c) => {
+      const cp = norm(c.href);
+      return !!cp && (current === cp || current.startsWith(cp + '/'));
+    }) ?? false
+  );
+}
+
+function isChildActive(childHref: string): boolean {
+  const cp = norm(childHref);
+  return !!cp && (current === cp || current.startsWith(cp + '/'));
+}
+---
+
+<header class="relative z-50 bg-white">
+  <!-- Diagonal top bar -->
+  <div
+    class="text-white"
+    style="background: linear-gradient(58deg, #C0212F 50%, #595A5C 50%);"
+  >
+    <div class="mx-auto flex max-w-[1717px] flex-wrap items-center justify-center gap-x-8 gap-y-1 px-4 py-2 text-sm sm:justify-end">
+      <a class="hover:opacity-90" href={`tel:${site.phones.erTel}`}>24/7 Emergency: {site.phones.er}</a>
+      <a class="hidden hover:opacity-90 sm:inline" href={`tel:${site.phones.clinicTel}`}>Medical Clinic: {site.phones.clinic}</a>
+      <a class="hidden hover:opacity-90 md:inline" href={`tel:${site.phones.billingTel}`}>Billing: {site.phones.billing}</a>
+    </div>
+  </div>
+
+  <!-- Main bar -->
+  <div class="border-b border-[#eee]">
+    <div class="container-home flex items-center gap-3 py-3 lg:gap-4">
+      <a href={base} class="w-[26%] min-w-[140px] shrink-0" aria-label={site.name}>
+        <img
+          src={`${base}images/FH-EmergencyRoom-Logo-ERClinic-1-1.png`}
+          alt={site.name}
+          class="h-auto w-full max-w-[220px]"
+          width="220"
+          height="100"
+        />
+      </a>
+
+      <nav class="hidden flex-1 items-center justify-center lg:flex" aria-label="Main">
+        {
+          nav.map((item) => {
+            const active = isActive(item);
+            return (
+              <div class="group relative">
+                <a
+                  href={href(item.href, item.external)}
+                  class:list={[
+                    'relative inline-flex items-center gap-1 px-2.5 py-1 text-[13px] font-semibold transition-colors xl:px-3.5 xl:text-base',
+                    active ? 'text-brand' : 'text-ink hover:text-brand',
+                  ]}
+                  style="font-family: var(--font-display);"
+                  aria-current={active ? 'page' : undefined}
+                  target={item.external ? '_blank' : undefined}
+                  rel={item.external ? 'noopener' : undefined}
+                >
+                  {item.label}
+                  {item.children && (
+                    <svg class="h-3 w-3 opacity-70" viewBox="0 0 12 12" aria-hidden="true" fill="currentColor">
+                      <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  )}
+                  {active && (
+                    <span class="absolute inset-x-2.5 -bottom-0.5 h-0.5 rounded-full bg-brand xl:inset-x-3.5" aria-hidden="true" />
+                  )}
+                </a>
+                {item.children && (
+                  <div class="invisible absolute left-0 top-full z-50 min-w-[240px] rounded-md bg-white py-2 opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100">
+                    {item.children.map((child) => {
+                      const childActive = isChildActive(child.href);
+                      return (
+                        <a
+                          href={href(child.href)}
+                          class:list={[
+                            'block px-4 py-2 text-sm transition-colors',
+                            childActive ? 'bg-brand text-white' : 'text-ink hover:bg-brand hover:text-white',
+                          ]}
+                          aria-current={childActive ? 'page' : undefined}
+                        >
+                          {child.label}
+                        </a>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          })
+        }
+      </nav>
+
+      <div class="ml-auto flex items-center gap-2 lg:gap-3">
+        <button
+          type="button"
+          class="hidden h-[38px] w-10 items-center justify-center rounded-[30px] bg-brand text-white sm:inline-flex"
+          aria-label="Search"
+          id="search-btn"
+        >
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-4.35-4.35M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14z"></path>
+          </svg>
+        </button>
+        <a href={href(site.healthpass)} class="btn-header-cta hidden md:inline-flex">
+          Join Healthpass
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/15">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+        <button
+          type="button"
+          id="nav-toggle"
+          class="inline-flex items-center justify-center rounded-lg border border-[#ddd] p-2 lg:hidden"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          aria-label="Open menu"
+        >
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-nav" class="hidden border-b border-[#eee] bg-white lg:hidden">
+    <nav class="container-home flex flex-col gap-1 py-3" aria-label="Mobile">
+      {
+        nav.flatMap((item) => {
+          const active = isActive(item);
+          return [
+            <a
+              href={href(item.href, item.external)}
+              class:list={[
+                'rounded-lg px-3 py-2 font-semibold',
+                active ? 'bg-pink text-brand' : 'text-ink hover:bg-pink hover:text-brand',
+              ]}
+              style="font-family: var(--font-display);"
+              aria-current={active ? 'page' : undefined}
+            >
+              {item.label}
+            </a>,
+            ...(item.children?.map((child) => {
+              const childActive = isChildActive(child.href);
+              return (
+                <a
+                  href={href(child.href)}
+                  class:list={[
+                    'rounded-lg px-6 py-2 text-sm',
+                    childActive ? 'bg-pink font-semibold text-brand' : 'text-muted hover:bg-pink',
+                  ]}
+                  aria-current={childActive ? 'page' : undefined}
+                >
+                  {child.label}
+                </a>
+              );
+            }) ?? []),
+          ];
+        })
+      }
+      <a href={href(site.healthpass)} class="btn-header-cta mt-2 justify-center">Join Healthpass</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-nav');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+</script>

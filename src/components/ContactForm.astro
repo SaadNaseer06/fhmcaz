@@ -1,0 +1,94 @@
+---
+interface Props {
+  action?: string;
+  submitLabel?: string;
+  type?: 'contact' | 'appointment';
+}
+
+const isVercel =
+  import.meta.env.VERCEL === '1' || import.meta.env.PUBLIC_DEPLOY_TARGET === 'vercel';
+
+const {
+  action = isVercel
+    ? `${import.meta.env.BASE_URL}api/contact`
+    : `${import.meta.env.BASE_URL}api/contact.php`,
+  submitLabel = 'Submit Request',
+  type = 'contact',
+} = Astro.props;
+---
+
+<form class="space-y-4 rounded-2xl border border-line bg-white p-6 shadow-sm" method="POST" action={action} novalidate>
+  <input type="hidden" name="form_type" value={type} />
+  <!-- Honeypot -->
+  <div class="hidden" aria-hidden="true">
+    <label>Company <input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    <div>
+      <label class="mb-1 block text-sm font-semibold" for="name">Full name</label>
+      <input
+        id="name"
+        name="name"
+        required
+        maxlength="120"
+        class="w-full rounded-xl border border-line px-4 py-3 outline-none focus:border-brand"
+      />
+    </div>
+    <div>
+      <label class="mb-1 block text-sm font-semibold" for="phone">Phone</label>
+      <input
+        id="phone"
+        name="phone"
+        type="tel"
+        required
+        maxlength="30"
+        class="w-full rounded-xl border border-line px-4 py-3 outline-none focus:border-brand"
+      />
+    </div>
+  </div>
+
+  <div>
+    <label class="mb-1 block text-sm font-semibold" for="email">Email</label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      required
+      maxlength="160"
+      class="w-full rounded-xl border border-line px-4 py-3 outline-none focus:border-brand"
+    />
+  </div>
+
+  {
+    type === 'appointment' && (
+      <div>
+        <label class="mb-1 block text-sm font-semibold" for="visit_type">Appointment type</label>
+        <select
+          id="visit_type"
+          name="visit_type"
+          class="w-full rounded-xl border border-line px-4 py-3 outline-none focus:border-brand"
+        >
+          <option>Primary Care (Establish Care / Follow-Ups)</option>
+          <option>Urgent Care (Illness, Injury, or Medical Concern)</option>
+        </select>
+      </div>
+    )
+  }
+
+  <div>
+    <label class="mb-1 block text-sm font-semibold" for="message">How can we help?</label>
+    <textarea
+      id="message"
+      name="message"
+      rows="4"
+      required
+      maxlength="2000"
+      class="w-full rounded-xl border border-line px-4 py-3 outline-none focus:border-brand"></textarea>
+  </div>
+
+  <button type="submit" class="btn-primary w-full sm:w-auto">{submitLabel}</button>
+  <p class="text-xs text-soft">
+    Do not use this form for medical emergencies. Call 911 or visit our ER — open 24/7.
+  </p>
+</form>
