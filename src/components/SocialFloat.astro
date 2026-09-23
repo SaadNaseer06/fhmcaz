@@ -1,7 +1,7 @@
 ---
 /**
- * Homepage hero social stack (matches WP Elementor widget 94a7797):
- * white rounded icons, red glyphs, absolute on the right of the hero.
+ * Homepage hero social stack (WP Elementor widget 94a7797):
+ * white rounded icons, red glyphs, vertically centered on the right of the banner.
  */
 import { site } from '../data/site';
 
@@ -40,10 +40,10 @@ const socials = [
 ---
 
 <aside
-  class="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-[10%] min-w-[72px] max-w-[125px] md:block"
+  class="pointer-events-none absolute inset-y-0 right-0 z-20 hidden md:flex md:w-[10%] md:min-w-[72px] md:max-w-[125px] md:items-center md:justify-center"
   aria-label="Social media"
 >
-  <div class="pointer-events-auto absolute right-3 top-6 flex flex-col items-center gap-[11px] lg:right-5 lg:top-10">
+  <div class="pointer-events-auto flex flex-col items-center gap-[11px]">
     {
       socials.map((s) => (
         <a
