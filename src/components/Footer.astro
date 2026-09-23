@@ -53,12 +53,12 @@ const socials = [
             socials.map((s) => (
               <a
                 href={s.href}
-                class="inline-flex h-10 w-10 items-center justify-center rounded-[7px] bg-brand transition hover:bg-[#241618]"
+                class="group inline-flex h-10 w-10 items-center justify-center rounded-[7px] bg-brand transition hover:bg-[#241618]"
                 aria-label={s.label}
                 rel="noopener"
                 target="_blank"
               >
-                <svg class="h-3.5 w-3.5 fill-white" viewBox="0 0 24 24" aria-hidden="true">
+                <svg class="h-5 w-5 fill-white transition group-hover:fill-brand" viewBox="0 0 24 24" aria-hidden="true">
                   <path d={s.path} />
                 </svg>
               </a>

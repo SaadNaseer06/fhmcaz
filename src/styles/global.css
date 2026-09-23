@@ -168,9 +168,9 @@
     color: #fff;
   }
 
+  /* Matches WP Elementor d9d46e4: text left, white circle icon right */
   .btn-header-cta {
     display: inline-flex;
-    flex-direction: row-reverse;
     align-items: center;
     gap: 0;
     background: #c0212f;
@@ -184,16 +184,17 @@
     line-height: 45px;
   }
   .btn-header-cta__label {
-    padding-right: 8px;
+    padding-right: 4px;
   }
   .btn-header-cta__icon {
     display: inline-flex;
     line-height: 0;
   }
   .btn-header-cta__icon svg {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: auto;
     display: block;
+    margin-left: 4px;
   }
   .btn-header-cta:hover {
     background: #b32733;
