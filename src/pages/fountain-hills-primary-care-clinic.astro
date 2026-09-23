@@ -1,49 +1,152 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PageHero from '../components/PageHero.astro';
 import HelpTrio from '../components/HelpTrio.astro';
 import BlogStrip from '../components/BlogStrip.astro';
 import Reviews from '../components/Reviews.astro';
 import { site } from '../data/site';
 
 const base = import.meta.env.BASE_URL;
+
+const slides = [
+  {
+    eyebrow: 'Fountain Hills Primary Care & Urgent Care Clinic',
+    titleHtml: '<span class="frist-word">Comprehensive</span> Primary Care',
+    text: 'At Fountain Hills Primary Care & Urgent Care Clinic, our mission is to keep you healthy with convenient, compassionate care. From routine checkups to same-day visits, our experienced team provides personalized, high-quality medical care close to home.',
+    image: 'Group-273354899.png',
+  },
+  {
+    eyebrow: 'Fountain Hills Primary Care & Urgent Care Clinic',
+    titleHtml: '<span class="frist-word">Comprehensive</span> Primary Care',
+    text: 'At Fountain Hills Primary Care & Urgent Care Clinic, our mission is to keep you healthy with convenient, compassionate care. From routine checkups to same-day visits, our experienced team provides personalized, high-quality medical care close to home.',
+    image: 'Group-273354900.png',
+  },
+  {
+    eyebrow: 'Fountain Hills Primary Care & Urgent Care Clinic',
+    titleHtml: '<span class="frist-word">Comprehensive</span> Primary Care',
+    text: 'At Fountain Hills Primary Care & Urgent Care Clinic, our mission is to keep you healthy with convenient, compassionate care. From routine checkups to same-day visits, our experienced team provides personalized, high-quality medical care close to home.',
+    image: 'Group-273354901.png',
+  },
+];
+
+const featureCards = [
+  {
+    t: 'Walk-In & Same-Day Visits',
+    d: 'Whether it’s a sudden illness or minor injury, we’re here when you need care — no appointment required.',
+  },
+  {
+    t: 'On-Site Lab & Imaging',
+    d: 'Fast diagnostics with lab testing and X-ray services available on-site for same-day results.',
+  },
+  {
+    t: 'Insurance & Billing Support',
+    d: 'We accept most insurance plans and provide transparent, simplified billing for all patients.',
+  },
+];
+
+const arrowIcon = `<svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><polyline fill="none" stroke="currentColor" stroke-width="1.5" points="10 5 15 9.5 10 14"></polyline><line fill="none" stroke="currentColor" stroke-width="1.5" x1="4" y1="9.5" x2="15" y2="9.5"></line></svg>`;
 ---
 
 <Layout title="Primary Care & Urgent Care" description="Comprehensive primary care and urgent care in Fountain Hills." siteMode="primary">
-  <PageHero
-    title="Fountain Hills Primary Care & Urgent Care Clinic"
-    subtitle="Comprehensive, compassionate care — from routine checkups to same-day visits."
-    crumbs={[{ label: 'Primary Care' }]}
-  />
+  <!-- WP prime-slider hero: Group-1770 red/hex bg + isolate doctor slides -->
+  <section
+    class="pc-hero relative overflow-hidden bg-[#C0212F] pb-[140px] pt-10 md:pb-[160px] md:pt-14"
+    data-pc-hero
+  >
+    <script
+      is:inline
+      type="application/json"
+      id="pc-hero-slides"
+      set:html={JSON.stringify(
+        slides.map((s) => ({
+          ...s,
+          image: `${base}images/${s.image}`,
+          href: `${base}book-appointments/`,
+        })),
+      )}
+    />
 
-  <section class="relative overflow-hidden bg-cover bg-center py-20 text-white" style={`background-image:url('${base}images/Group-1770.png');`}>
-    <div class="absolute inset-0 bg-ink/55"></div>
-    <div class="container-home relative grid items-center gap-8 lg:grid-cols-2">
-      <div data-animate="left">
-        <h2 class="text-3xl font-bold text-white md:text-5xl" style="font-family: var(--font-display);">Comprehensive Primary Care</h2>
-        <p class="mt-4 text-white/90">
-          At Fountain Hills Primary Care & Urgent Care Clinic, our mission is to keep you healthy with convenient, compassionate care. From routine checkups to same-day visits, our experienced team provides personalized, high-quality medical care close to home.
+    <div
+      class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      style={`background-image:url('${base}images/Group-1770.png');`}
+      aria-hidden="true"
+    ></div>
+
+    <div class="container-home relative z-10 grid items-center gap-8 lg:grid-cols-2 lg:gap-6">
+      <div class="max-w-[640px] text-white" data-pc-copy>
+        <p
+          class="mb-4 inline-flex items-center gap-2 rounded-full border border-white/80 px-4 py-1.5 text-sm font-medium text-white md:text-base"
+          style="font-family: var(--font-display);"
+        >
+          <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-white text-[11px] leading-none" aria-hidden="true">+</span>
+          <span data-pc-eyebrow>{slides[0].eyebrow}</span>
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a class="btn-cta-white" href={`${base}book-appointments/`}>Book an Appointment</a>
-          <a class="btn-cta-white border-white bg-transparent text-white" href={`tel:${site.phones.clinicTel}`}>{site.phones.clinic}</a>
+        <h1
+          class="font-bold text-white"
+          style="font-family: var(--font-display); font-size: clamp(2rem, 5vw, 4.25rem); line-height: 1.08;"
+          data-pc-title
+          set:html={slides[0].titleHtml}
+        />
+        <p class="mt-5 max-w-[560px] text-sm leading-relaxed text-white/95 md:text-base" style="font-family: var(--font-display);" data-pc-text>
+          {slides[0].text}
+        </p>
+        <a
+          href={`${base}book-appointments/`}
+          class="mt-8 inline-flex items-center gap-3 rounded-full bg-white py-2 pl-6 pr-2 text-base font-semibold text-brand transition hover:bg-pink"
+          style="font-family: var(--font-display);"
+          data-pc-cta
+        >
+          <span data-pc-cta-label>Book an Appointment</span>
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand text-white" set:html={arrowIcon} />
+        </a>
+
+        <div class="mt-10 flex gap-3">
+          <button
+            type="button"
+            class="inline-flex h-12 w-[46px] items-center justify-center border-2 border-white text-white transition hover:bg-white hover:text-brand"
+            aria-label="Previous slide"
+            data-pc-prev
+          >
+            <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M12.5 4.5L7 10l5.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="inline-flex h-12 w-[46px] items-center justify-center border-2 border-white text-white transition hover:bg-white hover:text-brand"
+            aria-label="Next slide"
+            data-pc-next
+          >
+            <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M7.5 4.5L13 10l-5.5 5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
         </div>
       </div>
-      <img src={`${base}images/Group-1654-3.png`} alt="Primary care" class="mx-auto max-h-[420px] w-auto" loading="lazy" data-animate="right" style="--delay:120ms" />
+
+      <div class="relative mx-auto flex w-full max-w-[560px] items-end justify-center lg:max-w-none lg:justify-end">
+        <img
+          src={`${base}images/${slides[0].image}`}
+          alt="Comprehensive Primary Care"
+          class="h-auto max-h-[560px] w-full object-contain transition-opacity duration-300 lg:max-h-[640px]"
+          width="648"
+          height="773"
+          data-pc-img
+          draggable="false"
+        />
+      </div>
     </div>
   </section>
 
-  <section class="bg-ink py-12 text-white">
-    <div class="container-home grid gap-6 md:grid-cols-3">
+  <!-- WP overlapping black feature cards -->
+  <section class="relative z-20 -mt-[120px] pb-4 md:-mt-[140px]">
+    <div class="container-home grid gap-5 md:grid-cols-3 md:gap-6">
       {
-        [
-          { t: 'Walk-In & Same-Day Visits', d: 'Sudden illness or minor injury — no appointment required.' },
-          { t: 'On-Site Lab & Imaging', d: 'Lab testing and X-ray services available for same-day results.' },
-          { t: 'Insurance & Billing Support', d: 'We accept most insurance plans with transparent, simplified billing.' },
-        ].map((c) => (
-          <article class="rounded-[16px] border border-white/15 p-6">
-            <h3 class="text-xl font-bold text-white" style="font-family: var(--font-display);">{c.t}</h3>
-            <p class="mt-3 text-white/80">{c.d}</p>
+        featureCards.map((c) => (
+          <article class="rounded-[20px] bg-black px-7 py-9 text-white shadow-[0_12px_40px_rgba(0,0,0,.25)]">
+            <h3 class="text-[22px] font-bold leading-snug text-white md:text-2xl" style="font-family: var(--font-display);">
+              {c.t}
+            </h3>
+            <p class="mt-4 text-[15px] leading-relaxed text-white/85">{c.d}</p>
           </article>
         ))
       }
@@ -56,12 +159,12 @@ const base = import.meta.env.BASE_URL;
       <div>
         <h2 class="section-title">Compassionate Primary & Urgent Care For You</h2>
         <p class="prose-site mt-4">
-          We’re dedicated to providing personalized, preventive, and compassionate care. From same-day urgent visits to routine checkups, our team keeps you and your family healthy — close to home.
+          At Fountain Hills Primary Care & Urgent Care Clinic, we’re dedicated to providing personalized, preventive, and compassionate care. From same-day urgent visits to routine checkups, our team keeps you and your family healthy — close to home.
         </p>
         <ul class="mt-6 space-y-3">
           <li><strong>Experienced Providers</strong> — Compassionate, personalized care for every age and need.</li>
           <li><strong>Immediate Care</strong> — Walk in for fast treatment of minor illnesses or injuries.</li>
-          <li><strong>In-House X-rays and Labs</strong> — Smooth, stress-free visits.</li>
+          <li><strong>In-House X-rays and Labs</strong> — X-rays and labs for a smooth, stress-free visit.</li>
         </ul>
       </div>
     </div>
@@ -75,11 +178,19 @@ const base = import.meta.env.BASE_URL;
           Simple Primary & Urgent Care Appointments
         </h2>
         <p class="mt-4 text-white/90">
-          Your health matters and we’re here to make care simple, convenient, and personal.
+          Your health matters and we’re here to make care simple, convenient, and personal. Whether it’s a same-day visit, a wellness check, or treatment for a sudden illness, our team is ready to help you feel better, faster.
         </p>
-        <p class="mt-4 inline-block rounded-full bg-white px-4 py-2 text-sm font-bold text-brand">PRIMARY CLINIC IS NOT OPEN 24/7</p>
+        <a
+          class="mt-4 inline-block rounded-full bg-white px-4 py-2 text-sm font-bold text-brand"
+          href={`tel:${site.phones.clinicTel}`}
+        >
+          PRIMARY CLINIC IS NOT OPEN 24/7
+        </a>
         <div class="mt-6 flex flex-wrap gap-3">
-          <a class="btn-cta-white" href={`${base}book-appointments/`}>Book Appointment</a>
+          <a class="btn-cta-white" href={`${base}book-appointments/`}>
+            Book an Appointment
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand text-white" set:html={arrowIcon} />
+          </a>
           <a class="btn-cta-white" href={`tel:${site.phones.clinicTel}`}>{site.phones.clinic}</a>
         </div>
       </div>
@@ -91,13 +202,16 @@ const base = import.meta.env.BASE_URL;
     <div class="container-home">
       <span class="pill-label">Why Choose Us</span>
       <h2 class="section-title mt-4">Why Choose Fountain Hills Primary Care & Urgent Care?</h2>
+      <p class="prose-site mt-4 max-w-3xl">
+        At Fountain Hills Primary Care & Urgent Care Clinic, we combine expert medical care with a personal touch. Our team of experienced providers, nurses, and staff are committed to helping you stay healthy with compassionate, convenient, and complete care — from wellness exams to same-day visits.
+      </p>
       <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {
           [
-            { img: '11111.png', t: 'Personalized Care', d: 'Attentive care built on trust, respect, and long-term relationships.' },
-            { img: '232222.png', t: 'Convenience That Cares', d: 'Same-day visits, walk-ins, and extended hours.' },
-            { img: '3333334444.png', t: 'Complete Family Services', d: 'From children to seniors — prevention to urgent needs.' },
-            { img: '33333.png', t: 'Board-Certified Clinicians', d: 'High-quality care for the best outcomes every visit.' },
+            { img: '11111.png', t: 'Personalized Care', d: 'Every patient receives attentive, personalized care built on trust, respect, and long-term relationships.' },
+            { img: '232222.png', t: 'Convenience That Cares', d: 'We make healthcare simple and accessible with same-day visits, walk-ins, and extended hours to fit your schedule.' },
+            { img: '3333334444.png', t: 'Complete Family Services', d: 'From children to seniors, we provide complete care for every stage of life — from prevention to chronic and urgent needs.' },
+            { img: '33333.png', t: 'Experienced Providers', d: 'Our board-certified clinicians deliver compassionate, high-quality care to ensure the best outcomes for every patient.' },
           ].map((c) => (
             <article class="rounded-[20px] bg-card p-5">
               <img src={`${base}images/${c.img}`} alt="" class="mb-4 h-16 w-16 object-contain" />
@@ -115,3 +229,86 @@ const base = import.meta.env.BASE_URL;
   <HelpTrio />
   <BlogStrip />
 </Layout>
+
+<style>
+  .pc-hero.is-fading [data-pc-copy],
+  .pc-hero.is-fading [data-pc-img] {
+    opacity: 0.35;
+  }
+  .pc-hero [data-pc-copy],
+  .pc-hero [data-pc-img] {
+    transition: opacity 0.35s ease;
+  }
+</style>
+
+<script>
+  const root = document.querySelector('[data-pc-hero]') as HTMLElement | null;
+  const dataEl = document.getElementById('pc-hero-slides');
+  if (root && dataEl) {
+    type Slide = {
+      eyebrow: string;
+      titleHtml: string;
+      text: string;
+      image: string;
+      href: string;
+    };
+    const slides = JSON.parse(dataEl.textContent || '[]') as Slide[];
+    const img = root.querySelector<HTMLImageElement>('[data-pc-img]');
+    const eyebrow = root.querySelector<HTMLElement>('[data-pc-eyebrow]');
+    const title = root.querySelector<HTMLElement>('[data-pc-title]');
+    const text = root.querySelector<HTMLElement>('[data-pc-text]');
+    const cta = root.querySelector<HTMLAnchorElement>('[data-pc-cta]');
+    const prev = root.querySelector<HTMLButtonElement>('[data-pc-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-pc-next]');
+
+    let i = 0;
+    let locked = false;
+    let timer: ReturnType<typeof setInterval> | undefined;
+
+    const apply = (slide: Slide) => {
+      if (eyebrow) eyebrow.textContent = slide.eyebrow;
+      if (title) title.innerHTML = slide.titleHtml;
+      if (text) text.textContent = slide.text;
+      if (cta) cta.href = slide.href;
+      if (img) img.src = slide.image;
+    };
+
+    const show = (n: number) => {
+      if (locked || slides.length < 2) return;
+      const nextIdx = (n + slides.length) % slides.length;
+      if (nextIdx === i) return;
+      locked = true;
+      root.classList.add('is-fading');
+      window.setTimeout(() => {
+        apply(slides[nextIdx]);
+        i = nextIdx;
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            root.classList.remove('is-fading');
+            locked = false;
+          });
+        });
+      }, 280);
+    };
+
+    const restart = () => {
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => show(i + 1), 7000);
+    };
+
+    slides.slice(1).forEach((s) => {
+      const pre = new Image();
+      pre.src = s.image;
+    });
+
+    prev?.addEventListener('click', () => {
+      show(i - 1);
+      restart();
+    });
+    next?.addEventListener('click', () => {
+      show(i + 1);
+      restart();
+    });
+    restart();
+  }
+</script>
