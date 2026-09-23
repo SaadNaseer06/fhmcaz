@@ -76,7 +76,7 @@ const healthpassIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="49" heigh
         />
       </a>
 
-      <nav class="hidden flex-1 items-center justify-center xl:flex" aria-label="Main">
+      <nav class="hidden flex-1 items-center justify-center lg:flex" aria-label="Main">
         {
           nav.map((item) => {
             const active = isActive(item);
@@ -171,7 +171,7 @@ const healthpassIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="49" heigh
         <button
           type="button"
           id="nav-toggle"
-          class="inline-flex items-center justify-center p-2 text-[#5D6063] xl:hidden"
+          class="inline-flex items-center justify-center p-2 text-[#5D6063] lg:hidden"
           aria-expanded="false"
           aria-controls="mobile-nav"
           aria-label="Open menu"
@@ -184,7 +184,7 @@ const healthpassIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="49" heigh
     </div>
   </div>
 
-  <div id="mobile-nav" class="hidden border-b border-[#eee] bg-white xl:hidden">
+  <div id="mobile-nav" class="hidden border-b border-[#eee] bg-white lg:hidden">
     <nav class="container-home flex flex-col gap-1 py-3" aria-label="Mobile">
       {
         nav.flatMap((item) => {

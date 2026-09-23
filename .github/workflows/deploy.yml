@@ -36,7 +36,11 @@ jobs:
           VERCEL: "1"
 
       - name: Deploy
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: |
+          url=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "Deployed: $url"
+          vercel alias set "$url" fhmcaz.vercel.app --token=${{ secrets.VERCEL_TOKEN }} || true
+          vercel alias set "$url" fhm.serverlinktestwebsites.com --token=${{ secrets.VERCEL_TOKEN }} || true
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
