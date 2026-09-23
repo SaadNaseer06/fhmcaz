@@ -133,8 +133,8 @@ const why = [
     <div class="container-home relative z-10 grid min-h-[82vh] items-center gap-6 py-12 lg:grid-cols-2">
       <div class="hero-copy max-w-[640px] text-white" data-hero-copy>
         <h4
-          class="mb-3 text-sm font-semibold md:text-base"
-          style="font-family: var(--font-display); color: #61ce70;"
+          class="mb-3 text-sm font-semibold text-white/90 md:text-base"
+          style="font-family: var(--font-display);"
           data-hero-eyebrow
         >
           {slides[0].eyebrow}
@@ -170,19 +170,6 @@ const why = [
           draggable="false"
         />
       </div>
-    </div>
-
-    <div class="pointer-events-none absolute right-0 top-0 z-20 hidden h-full w-10 flex-col items-center justify-center gap-3 xl:flex">
-      <img src={`${base}images/Gradient.png`} alt="" class="h-[40%] w-2 object-cover" />
-      <div class="pointer-events-auto flex flex-col gap-2">
-        <a href={site.social.facebook} class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#A80E0E] shadow" aria-label="Facebook" rel="noopener" target="_blank">
-          <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24"><path d="M14 13.5h2.5l.5-3H14v-1.5c0-.9.2-1.5 1.5-1.5H17V4.5h-2c-2.5 0-4 1.5-4 4V10.5H9v3h2V20h3v-6.5z"/></svg>
-        </a>
-        <a href={site.social.instagram} class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-[#A80E0E] shadow" aria-label="Instagram" rel="noopener" target="_blank">
-          <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
-        </a>
-      </div>
-      <img src={`${base}images/Gradient-1.png`} alt="" class="h-[40%] w-2 object-cover" />
     </div>
 
     <div class="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-2.5">
