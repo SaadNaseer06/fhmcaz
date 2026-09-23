@@ -1,5 +1,13 @@
 ---
-import { nav, site, type NavItem } from '../data/site';
+import { nav, navPrimary, site, type NavItem, type SiteMode } from '../data/site';
+
+interface Props {
+  mode?: SiteMode;
+}
+
+const { mode = 'er' } = Astro.props;
+const items = mode === 'primary' ? navPrimary : nav;
+const homeHref = mode === 'primary' ? '/fountain-hills-primary-care-clinic/' : '/';
 const base = import.meta.env.BASE_URL;
 
 function href(path: string, external?: boolean) {
@@ -68,7 +76,7 @@ const healthpassIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="49" heigh
   <!-- WP c8600d6: logo 26% | nav 63% | actions -->
   <div class="border-b border-[#eee]">
     <div class="mx-auto flex max-w-[1717px] items-center px-4 py-3 sm:px-6 lg:px-8">
-      <a href={base} class="w-[26%] min-w-[140px] max-w-[280px] shrink-0" aria-label={site.name}>
+      <a href={href(homeHref)} class="w-[26%] min-w-[140px] max-w-[280px] shrink-0" aria-label={site.name}>
         <img
           src={`${base}images/FH-EmergencyRoom-Logo-ERClinic-1-1.png`}
           alt={site.name}
@@ -84,7 +92,7 @@ const healthpassIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="49" heigh
         style="max-width: 63%;"
       >
         {
-          nav.map((item) => {
+          items.map((item) => {
             const active = isActive(item);
             return (
               <div class="group relative">
@@ -191,7 +199,7 @@ const healthpassIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="49" heigh
   <div id="mobile-nav" class="hidden border-b border-[#eee] bg-white lg:hidden">
     <nav class="mx-auto flex max-w-[1717px] flex-col gap-1 px-4 py-3 sm:px-6" aria-label="Mobile">
       {
-        nav.flatMap((item) => {
+        items.flatMap((item) => {
           const active = isActive(item);
           return [
             <a

@@ -1,7 +1,28 @@
 ---
-import { site } from '../data/site';
+import {
+  footerQuickEr,
+  footerQuickPrimary,
+  site,
+  type SiteMode,
+} from '../data/site';
+
+interface Props {
+  mode?: SiteMode;
+}
+
+const { mode = 'er' } = Astro.props;
+const quickLinks = mode === 'primary' ? footerQuickPrimary : footerQuickEr;
+const locationBlurb =
+  mode === 'primary'
+    ? 'Visit our convenient clinic in the heart of Fountain Hills for quality, same-day primary & urgent care services.'
+    : 'Visit our modern facility in Fountain Hills, AZ — open 24/7 for emergency and family medical services.';
 const base = import.meta.env.BASE_URL;
 const year = new Date().getFullYear();
+
+function linkHref(path: string, external?: boolean) {
+  if (external || path.startsWith('http')) return path;
+  return `${base}${path.replace(/^\//, '')}`;
+}
 
 const socials = [
   {
@@ -72,18 +93,20 @@ const socials = [
           Quick Link
         </h3>
         <ul class="space-y-3 text-base text-footer-muted">
-          <li>
-            <a class="hover:text-white" href={`${base}frequently-asked-questions/`}>FAQ</a>
-          </li>
-          <li>
-            <a class="hover:text-white" href={site.payBill} rel="noopener" target="_blank">Billing</a>
-          </li>
-          <li>
-            <a class="hover:text-white" href={`${base}privacy-policy/`}>Privacy Policy</a>
-          </li>
-          <li>
-            <a class="hover:text-white" href={`${base}contact-us/`}>Contact</a>
-          </li>
+          {
+            quickLinks.map((link) => (
+              <li>
+                <a
+                  class="hover:text-white"
+                  href={linkHref(link.href, link.external)}
+                  rel={link.external ? 'noopener' : undefined}
+                  target={link.external ? '_blank' : undefined}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
@@ -120,10 +143,7 @@ const socials = [
         <h3 class="mb-5 text-2xl font-semibold text-white" style="font-family: var(--font-display);">
           Location
         </h3>
-        <p class="text-base text-footer-muted">
-          Visit our modern facility in Fountain Hills, AZ — open 24/7 for emergency and family medical
-          services.
-        </p>
+        <p class="text-base text-footer-muted">{locationBlurb}</p>
         <p class="mt-3 text-base text-footer-muted">{site.address.full}</p>
         <a
           class="mt-4 inline-block border-b border-[#B90505] pb-2.5 text-base font-semibold text-[#B90505] transition hover:text-white hover:border-white"
