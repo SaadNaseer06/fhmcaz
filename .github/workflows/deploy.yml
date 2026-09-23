@@ -30,6 +30,10 @@ jobs:
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          SITE_URL: https://fhm.serverlinktestwebsites.com
+          BASE_PATH: /
+          WP_API_URL: https://fhmcaz.serverlinktestwebsites.com/wp-json/wp/v2
+          VERCEL: "1"
 
       - name: Deploy
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
